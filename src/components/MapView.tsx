@@ -49,8 +49,8 @@ export default function MapView({ nychaData, segmentsData, allNychaData, devData
 
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
-      // Use streets style so basemap roads/labels are visible
-      style: "mapbox://styles/mapbox/dark-v11",
+      // navigation-night has better road visibility on dark background
+      style: "mapbox://styles/mapbox/navigation-night-v1",
       center: [-73.93, 40.75],
       zoom: 11.5,
       minZoom: 9,
