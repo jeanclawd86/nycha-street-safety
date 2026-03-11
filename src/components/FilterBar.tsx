@@ -15,7 +15,7 @@ export default function FilterBar({ filters, setFilters, boroughs, maxInjuryCoun
   const [expanded, setExpanded] = useState(true);
 
   const isFiltered = filters.borough !== "all" || filters.minInjuries > 0 || 
-    filters.hasDeaths !== null || filters.search !== "" || filters.minStreets > 0;
+    filters.hasDeaths !== null || filters.search !== "" || filters.minStreets > 0 || filters.truckRoute !== "all";
 
   const activeCount = [
     filters.borough !== "all",
@@ -23,6 +23,7 @@ export default function FilterBar({ filters, setFilters, boroughs, maxInjuryCoun
     filters.hasDeaths !== null,
     filters.search !== "",
     filters.minStreets > 0,
+    filters.truckRoute !== "all",
   ].filter(Boolean).length;
 
   if (!expanded) {
@@ -54,6 +55,9 @@ export default function FilterBar({ filters, setFilters, boroughs, maxInjuryCoun
               )}
               {filters.minStreets > 0 && (
                 <FilterChip label={`≥${filters.minStreets} streets`} onRemove={() => setFilters({ ...filters, minStreets: 0 })} />
+              )}
+              {filters.truckRoute !== "all" && (
+                <FilterChip label={filters.truckRoute === "truck" ? "Truck routes only" : "Non-truck only"} onRemove={() => setFilters({ ...filters, truckRoute: "all" })} color={filters.truckRoute === "truck" ? "red" : "blue"} />
               )}
               {filters.search && (
                 <FilterChip label={`"${filters.search}"`} onRemove={() => setFilters({ ...filters, search: "" })} />
@@ -149,6 +153,23 @@ export default function FilterBar({ filters, setFilters, boroughs, maxInjuryCoun
         >
           ☠ Fatalities
         </button>
+
+        {/* Truck route filter */}
+        <div className="flex items-center bg-[#242836] border border-[#363b4e] rounded-md overflow-hidden shrink-0">
+          {([["all", "All"], ["truck", "🚛 Truck"], ["non-truck", "Non-truck"]] as const).map(([val, label]) => (
+            <button
+              key={val}
+              onClick={() => setFilters({ ...filters, truckRoute: val as any })}
+              className={`px-2.5 py-1.5 text-xs font-medium transition-colors ${
+                filters.truckRoute === val
+                  ? "bg-blue-600/30 text-blue-300"
+                  : "text-gray-500 hover:text-gray-300"
+              }`}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
 
         {/* Reset */}
         {isFiltered && (

@@ -9,12 +9,12 @@ export default function Legend() {
 
   const segmentColors = [
     { color: "#6b7280", label: "0" },
-    { color: "#22c55e", label: "1–9" },
-    { color: "#84cc16", label: "10–24" },
-    { color: "#eab308", label: "25–39" },
-    { color: "#f97316", label: "40–59" },
-    { color: "#dc2626", label: "60–79" },
-    { color: "#7f1d1d", label: "80+" },
+    { color: "#22c55e", label: "1–4" },
+    { color: "#84cc16", label: "5–11" },
+    { color: "#eab308", label: "12–22" },
+    { color: "#f97316", label: "23–34" },
+    { color: "#dc2626", label: "35–49" },
+    { color: "#7f1d1d", label: "50+" },
   ];
 
   if (!expanded) {

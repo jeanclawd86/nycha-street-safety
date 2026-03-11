@@ -4,6 +4,7 @@ export interface Filters {
   maxInjuries: number;
   minStreets: number;
   hasDeaths: boolean | null;
+  truckRoute: "all" | "truck" | "non-truck";
   search: string;
 }
 
@@ -17,17 +18,17 @@ export interface Development {
   severity: SeverityLevel;
 }
 
-// 7-tier severity scale based on actual data distribution (0–255, median 39)
+// 7-tier severity scale calibrated to percentiles (N=105, range 0–255, median 39)
 export type SeverityLevel = "critical" | "very-high" | "high" | "elevated" | "moderate" | "low" | "minimal";
 
 export function getSeverity(injuries: number, deaths: number): Development["severity"] {
-  if (injuries >= 120 || deaths >= 3) return "critical";      // top ~5%
-  if (injuries >= 75) return "very-high";                      // P85+
-  if (injuries >= 50) return "high";                           // P65+
-  if (injuries >= 30) return "elevated";                       // ~median
-  if (injuries >= 15) return "moderate";                       // P25+
-  if (injuries >= 1) return "low";                             // some injuries
-  return "minimal";                                            // 0 injuries
+  if (injuries >= 100 || deaths >= 3) return "critical";       // P90+ (5 devs)
+  if (injuries >= 65) return "very-high";                       // P75-P90 (13 devs)
+  if (injuries >= 40) return "high";                            // P50-P75 (24 devs)
+  if (injuries >= 22) return "elevated";                        // P25-P50 (24 devs)
+  if (injuries >= 10) return "moderate";                        // P10-P25 (21 devs)
+  if (injuries >= 1) return "low";                              // bottom (15 devs)
+  return "minimal";                                             // 0 injuries (3 devs)
 }
 
 export const SEVERITY_COLORS: Record<Development["severity"], string> = {
@@ -41,12 +42,12 @@ export const SEVERITY_COLORS: Record<Development["severity"], string> = {
 };
 
 export const SEVERITY_LABELS: Record<Development["severity"], string> = {
-  critical: "Critical (120+ injuries or 3+ deaths)",
-  "very-high": "Very High (75–119 injuries)",
-  high: "High (50–74 injuries)",
-  elevated: "Elevated (30–49 injuries)",
-  moderate: "Moderate (15–29 injuries)",
-  low: "Low (1–14 injuries)",
+  critical: "Critical (100+ injuries or 3+ deaths)",
+  "very-high": "Very High (65–99 injuries)",
+  high: "High (40–64 injuries)",
+  elevated: "Elevated (22–39 injuries)",
+  moderate: "Moderate (10–21 injuries)",
+  low: "Low (1–9 injuries)",
   minimal: "Minimal (0 injuries)",
 };
 
@@ -56,5 +57,6 @@ export const DEFAULT_FILTERS: Filters = {
   maxInjuries: Infinity,
   minStreets: 0,
   hasDeaths: null,
+  truckRoute: "all",
   search: "",
 };

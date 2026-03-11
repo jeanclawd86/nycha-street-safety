@@ -108,12 +108,15 @@ export default function Home() {
   // Filter NYCHA GeoJSON to match
   const filteredNychaNames = useMemo(() => new Set(filteredDevs.map((d) => d.name)), [filteredDevs]);
 
-  // Filtered segments: only those adjacent to filtered NYCHA developments
+  // Filtered segments: adjacent to filtered NYCHA developments + truck route filter
   const filteredSegments = useMemo(() => {
     if (!segmentsData) return null;
     return {
       ...segmentsData,
       features: segmentsData.features.filter((f) => {
+        // Truck route filter
+        if (filters.truckRoute === "truck" && !f.properties?.is_truck_route) return false;
+        if (filters.truckRoute === "non-truck" && f.properties?.is_truck_route) return false;
         try {
           const adjacent = JSON.parse(f.properties?.adjacent_nycha || "[]");
           return adjacent.some((name: string) => filteredNychaNames.has(name));
@@ -122,7 +125,7 @@ export default function Home() {
         }
       }),
     };
-  }, [segmentsData, filteredNychaNames]);
+  }, [segmentsData, filteredNychaNames, filters.truckRoute]);
 
   // Filtered NYCHA polygons
   const filteredNycha = useMemo(() => {
