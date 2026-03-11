@@ -1,0 +1,28 @@
+{
+  "name": "nycha-street-safety",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "build-data": "node scripts/build-data.js"
+  },
+  "dependencies": {
+    "@turf/turf": "^7.1.0",
+    "mapbox-gl": "^3.8.0",
+    "next": "^14.2.0",
+    "rbush": "^4.0.1",
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
+    "autoprefixer": "^10.4.0",
+    "postcss": "^8.4.0",
+    "tailwindcss": "^3.4.0",
+    "typescript": "^5.0.0"
+  }
+}
