@@ -179,11 +179,11 @@ export default function MapView({ nychaData, segmentsData, allNychaData, devData
               ["get", "pedestrian_injuries"],
               0, "#6b7280",
               1, "#22c55e",
-              5, "#84cc16",
-              10, "#eab308",
-              20, "#f97316",
-              30, "#dc2626",
-              45, "#7f1d1d",
+              10, "#84cc16",
+              25, "#eab308",
+              40, "#f97316",
+              60, "#dc2626",
+              80, "#7f1d1d",
             ],
             "line-width": [
               "interpolate", ["linear"], ["zoom"],
@@ -264,10 +264,11 @@ export default function MapView({ nychaData, segmentsData, allNychaData, devData
 
           const speedLabel = props.speed_limit ? `${props.speed_limit} mph` : "N/A";
           const lanesLabel = props.travel_lanes ? `${props.travel_lanes} travel / ${props.total_lanes || '?'} total` : "N/A";
+          const truckBadge = props.is_truck_route ? '<span style="display:inline-block;padding:1px 6px;border-radius:3px;font-size:10px;font-weight:600;background:#78350f;color:#fbbf24;margin-left:6px;">🚛 TRUCK ROUTE</span>' : '';
 
           const html = `
             <div style="font-family: system-ui, sans-serif; font-size: 13px; line-height: 1.5;">
-              <div style="font-weight: 700; font-size: 15px; margin-bottom: 4px;">${props.street_name || "Unknown Street"}</div>
+              <div style="font-weight: 700; font-size: 15px; margin-bottom: 4px;">${props.street_name || "Unknown Street"}${truckBadge}</div>
               <div style="display: flex; gap: 8px; color: #94a3b8; margin-bottom: 8px; font-size: 12px;">
                 <span>Width: <strong style="color: #e2e8f0;">${props.width || "?"}ft</strong></span>
                 <span>Speed: <strong style="color: #e2e8f0;">${speedLabel}</strong></span>

@@ -352,8 +352,39 @@ async function main() {
   ]);
   console.log(`\n⏱️  Fetch complete in ${((Date.now() - t0) / 1000).toFixed(1)}s`);
 
-  const noTrucks = excludeTruckRoutes(allStreets, truckData);
-  const nearNYCHA = findSegmentsNearNYCHA(noTrucks, nychaFC);
+  // Tag segments that are truck routes (but don't exclude them)
+  console.log("\n🚛 Tagging truck route segments...");
+  const { streetNames: truckNames, features: truckFC } = truckData;
+  const truckIndex = buildGridIndex(truckFC.features, 0.002);
+  let taggedTruck = 0;
+  for (const seg of allStreets.features) {
+    const segName = (seg.properties.street_name || "").toUpperCase().trim();
+    let isTruck = false;
+    if (segName && truckNames.has(segName)) isTruck = true;
+    if (!isTruck) {
+      try {
+        const midpoint = turf.pointOnFeature(seg);
+        const midBbox = [
+          midpoint.geometry.coordinates[0] - 0.0002,
+          midpoint.geometry.coordinates[1] - 0.0002,
+          midpoint.geometry.coordinates[0] + 0.0002,
+          midpoint.geometry.coordinates[1] + 0.0002,
+        ];
+        const candidates = queryGrid(truckIndex, midBbox);
+        for (const ci of candidates) {
+          try {
+            const dist = distToFeature(midpoint, truckFC.features[ci]);
+            if (dist < 15) { isTruck = true; break; }
+          } catch {}
+        }
+      } catch {}
+    }
+    seg.properties.is_truck_route = isTruck;
+    if (isTruck) taggedTruck++;
+  }
+  console.log(`  ✓ Tagged ${taggedTruck} of ${allStreets.features.length} segments as truck routes`);
+
+  const nearNYCHA = findSegmentsNearNYCHA(allStreets, nychaFC);
   const withCrashes = assignCollisions(nearNYCHA, collisions);
   const devTable = buildDevTable(withCrashes, nychaFC);
 

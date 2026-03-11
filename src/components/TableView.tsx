@@ -134,11 +134,11 @@ export default function TableView({ data, nychaData, onSelectDevelopment, select
                   <td className="px-4 py-3 text-right">{dev.adjacent_wide_streets}</td>
                   <td className="px-4 py-3 text-right">
                     <span className={
-                      dev.total_pedestrian_injuries >= 60 ? "text-red-700 font-bold" :
-                      dev.total_pedestrian_injuries >= 45 ? "text-red-400 font-semibold" :
-                      dev.total_pedestrian_injuries >= 30 ? "text-orange-400 font-semibold" :
-                      dev.total_pedestrian_injuries >= 20 ? "text-yellow-400" :
-                      dev.total_pedestrian_injuries >= 10 ? "text-lime-400" : "text-gray-300"
+                      dev.total_pedestrian_injuries >= 120 ? "text-red-700 font-bold" :
+                      dev.total_pedestrian_injuries >= 75 ? "text-red-400 font-semibold" :
+                      dev.total_pedestrian_injuries >= 50 ? "text-orange-400 font-semibold" :
+                      dev.total_pedestrian_injuries >= 30 ? "text-yellow-400" :
+                      dev.total_pedestrian_injuries >= 15 ? "text-lime-400" : "text-gray-300"
                     }>
                       {dev.total_pedestrian_injuries}
                     </span>
