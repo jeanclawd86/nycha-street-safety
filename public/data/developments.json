@@ -1,931 +1,307 @@
 [
   {
-    "name": "MILL BROOK",
-    "borough": "BRONX",
-    "adjacent_wide_streets": 3,
-    "total_pedestrian_injuries": 238,
-    "total_pedestrian_deaths": 1,
-    "total_crashes": 226
-  },
-  {
-    "name": "WOODSIDE",
-    "borough": "QUEENS",
-    "adjacent_wide_streets": 3,
-    "total_pedestrian_injuries": 213,
-    "total_pedestrian_deaths": 1,
-    "total_crashes": 200
-  },
-  {
-    "name": "RAVENSWOOD",
-    "borough": "QUEENS",
-    "adjacent_wide_streets": 9,
-    "total_pedestrian_injuries": 203,
-    "total_pedestrian_deaths": 1,
-    "total_crashes": 196
-  },
-  {
-    "name": "CLASON POINT GARDENS",
-    "borough": "BRONX",
-    "adjacent_wide_streets": 3,
-    "total_pedestrian_injuries": 184,
-    "total_pedestrian_deaths": 4,
-    "total_crashes": 171
-  },
-  {
-    "name": "MELROSE",
-    "borough": "BRONX",
-    "adjacent_wide_streets": 7,
-    "total_pedestrian_injuries": 173,
-    "total_pedestrian_deaths": 2,
-    "total_crashes": 169
-  },
-  {
-    "name": "PATTERSON",
-    "borough": "BRONX",
-    "adjacent_wide_streets": 4,
-    "total_pedestrian_injuries": 170,
-    "total_pedestrian_deaths": 2,
-    "total_crashes": 167
-  },
-  {
-    "name": "BREVOORT",
-    "borough": "BROOKLYN",
-    "adjacent_wide_streets": 17,
-    "total_pedestrian_injuries": 161,
-    "total_pedestrian_deaths": 1,
-    "total_crashes": 155
-  },
-  {
-    "name": "CYPRESS HILLS",
-    "borough": "BROOKLYN",
-    "adjacent_wide_streets": 11,
-    "total_pedestrian_injuries": 143,
-    "total_pedestrian_deaths": 2,
-    "total_crashes": 141
-  },
-  {
-    "name": "VAN DYKE I",
-    "borough": "BROOKLYN",
-    "adjacent_wide_streets": 23,
-    "total_pedestrian_injuries": 139,
-    "total_pedestrian_deaths": 2,
-    "total_crashes": 135
-  },
-  {
-    "name": "CLAREMONT REHAB (GROUP 2)",
-    "borough": "BRONX",
-    "adjacent_wide_streets": 3,
-    "total_pedestrian_injuries": 138,
-    "total_pedestrian_deaths": 1,
-    "total_crashes": 134
-  },
-  {
-    "name": "MORRIS I",
-    "borough": "BRONX",
-    "adjacent_wide_streets": 3,
-    "total_pedestrian_injuries": 137,
-    "total_pedestrian_deaths": 1,
-    "total_crashes": 131
-  },
-  {
-    "name": "MONROE",
-    "borough": "BRONX",
-    "adjacent_wide_streets": 3,
-    "total_pedestrian_injuries": 135,
-    "total_pedestrian_deaths": 2,
-    "total_crashes": 124
-  },
-  {
-    "name": "MORRIS II",
-    "borough": "BRONX",
-    "adjacent_wide_streets": 4,
-    "total_pedestrian_injuries": 123,
-    "total_pedestrian_deaths": 1,
-    "total_crashes": 119
-  },
-  {
-    "name": "BREUKELEN",
-    "borough": "BROOKLYN",
-    "adjacent_wide_streets": 23,
-    "total_pedestrian_injuries": 119,
-    "total_pedestrian_deaths": 3,
-    "total_crashes": 117
-  },
-  {
-    "name": "SUMNER",
-    "borough": "BROOKLYN",
-    "adjacent_wide_streets": 8,
-    "total_pedestrian_injuries": 117,
-    "total_pedestrian_deaths": 0,
-    "total_crashes": 112
-  },
-  {
-    "name": "BROWNSVILLE",
-    "borough": "BROOKLYN",
-    "adjacent_wide_streets": 18,
-    "total_pedestrian_injuries": 114,
-    "total_pedestrian_deaths": 1,
-    "total_crashes": 107
-  },
-  {
-    "name": "LATIMER GARDENS",
-    "borough": "QUEENS",
-    "adjacent_wide_streets": 3,
-    "total_pedestrian_injuries": 107,
-    "total_pedestrian_deaths": 2,
-    "total_crashes": 108
-  },
-  {
-    "name": "PELHAM PARKWAY",
-    "borough": "BRONX",
-    "adjacent_wide_streets": 13,
-    "total_pedestrian_injuries": 106,
-    "total_pedestrian_deaths": 3,
-    "total_crashes": 104
-  },
-  {
-    "name": "JACKSON",
-    "borough": "BRONX",
-    "adjacent_wide_streets": 7,
-    "total_pedestrian_injuries": 103,
-    "total_pedestrian_deaths": 1,
-    "total_crashes": 101
-  },
-  {
-    "name": "KINGSBOROUGH",
-    "borough": "BROOKLYN",
-    "adjacent_wide_streets": 11,
-    "total_pedestrian_injuries": 101,
-    "total_pedestrian_deaths": 1,
-    "total_crashes": 100
-  },
-  {
-    "name": "LONG ISLAND BAPTIST HOUSES",
-    "borough": "BROOKLYN",
-    "adjacent_wide_streets": 12,
-    "total_pedestrian_injuries": 101,
-    "total_pedestrian_deaths": 2,
-    "total_crashes": 99
-  },
-  {
-    "name": "ROOSEVELT I",
-    "borough": "BROOKLYN",
-    "adjacent_wide_streets": 16,
-    "total_pedestrian_injuries": 101,
-    "total_pedestrian_deaths": 0,
-    "total_crashes": 96
-  },
-  {
-    "name": "MORRISANIA AIR RIGHTS",
-    "borough": "BRONX",
-    "adjacent_wide_streets": 5,
-    "total_pedestrian_injuries": 98,
-    "total_pedestrian_deaths": 1,
-    "total_crashes": 97
-  },
-  {
-    "name": "BUTLER",
-    "borough": "BRONX",
-    "adjacent_wide_streets": 5,
-    "total_pedestrian_injuries": 98,
-    "total_pedestrian_deaths": 0,
-    "total_crashes": 95
-  },
-  {
-    "name": "SAINT NICHOLAS",
+    "name": "DYCKMAN",
     "borough": "MANHATTAN",
-    "adjacent_wide_streets": 3,
-    "total_pedestrian_injuries": 96,
-    "total_pedestrian_deaths": 1,
-    "total_crashes": 92
-  },
-  {
-    "name": "WASHINGTON",
-    "borough": "MANHATTAN",
-    "adjacent_wide_streets": 3,
-    "total_pedestrian_injuries": 94,
-    "total_pedestrian_deaths": 2,
-    "total_crashes": 91
-  },
-  {
-    "name": "FHA REPOSSESSED HOUSES (GROUP V)",
-    "borough": "",
-    "adjacent_wide_streets": 8,
-    "total_pedestrian_injuries": 92,
-    "total_pedestrian_deaths": 1,
-    "total_crashes": 90
-  },
-  {
-    "name": "TILDEN",
-    "borough": "BROOKLYN",
-    "adjacent_wide_streets": 11,
-    "total_pedestrian_injuries": 91,
-    "total_pedestrian_deaths": 2,
-    "total_crashes": 88
-  },
-  {
-    "name": "BORINQUEN PLAZA I",
-    "borough": "BROOKLYN",
-    "adjacent_wide_streets": 7,
-    "total_pedestrian_injuries": 91,
-    "total_pedestrian_deaths": 2,
-    "total_crashes": 90
-  },
-  {
-    "name": "MORRISANIA",
-    "borough": "BRONX",
-    "adjacent_wide_streets": 2,
-    "total_pedestrian_injuries": 88,
-    "total_pedestrian_deaths": 1,
-    "total_crashes": 83
+    "adjacent_wide_streets": 14,
+    "total_pedestrian_injuries": 85,
+    "total_pedestrian_deaths": 0,
+    "total_crashes": 79
   },
   {
     "name": "SHEEPSHEAD BAY",
     "borough": "BROOKLYN",
-    "adjacent_wide_streets": 14,
-    "total_pedestrian_injuries": 88,
+    "adjacent_wide_streets": 11,
+    "total_pedestrian_injuries": 82,
     "total_pedestrian_deaths": 1,
-    "total_crashes": 84
+    "total_crashes": 79
   },
   {
-    "name": "SOUNDVIEW",
-    "borough": "BRONX",
-    "adjacent_wide_streets": 7,
-    "total_pedestrian_injuries": 88,
-    "total_pedestrian_deaths": 2,
-    "total_crashes": 85
-  },
-  {
-    "name": "CASTLE HILL",
-    "borough": "BRONX",
-    "adjacent_wide_streets": 3,
-    "total_pedestrian_injuries": 87,
-    "total_pedestrian_deaths": 2,
-    "total_crashes": 84
-  },
-  {
-    "name": "SMITH",
+    "name": "SAINT NICHOLAS",
     "borough": "MANHATTAN",
-    "adjacent_wide_streets": 8,
-    "total_pedestrian_injuries": 84,
+    "adjacent_wide_streets": 6,
+    "total_pedestrian_injuries": 73,
     "total_pedestrian_deaths": 1,
-    "total_crashes": 84
+    "total_crashes": 69
+  },
+  {
+    "name": "POLO GROUNDS TOWERS",
+    "borough": "MANHATTAN",
+    "adjacent_wide_streets": 3,
+    "total_pedestrian_injuries": 60,
+    "total_pedestrian_deaths": 0,
+    "total_crashes": 58
+  },
+  {
+    "name": "DREW-HAMILTON",
+    "borough": "MANHATTAN",
+    "adjacent_wide_streets": 4,
+    "total_pedestrian_injuries": 57,
+    "total_pedestrian_deaths": 0,
+    "total_crashes": 56
+  },
+  {
+    "name": "MONROE",
+    "borough": "BRONX",
+    "adjacent_wide_streets": 6,
+    "total_pedestrian_injuries": 54,
+    "total_pedestrian_deaths": 3,
+    "total_crashes": 54
   },
   {
     "name": "MARBLE HILL",
     "borough": "BRONX",
-    "adjacent_wide_streets": 4,
-    "total_pedestrian_injuries": 84,
-    "total_pedestrian_deaths": 2,
-    "total_crashes": 83
-  },
-  {
-    "name": "BROWN",
-    "borough": "BROOKLYN",
-    "adjacent_wide_streets": 9,
-    "total_pedestrian_injuries": 84,
-    "total_pedestrian_deaths": 1,
-    "total_crashes": 83
-  },
-  {
-    "name": "FIRST HOUSES",
-    "borough": "MANHATTAN",
-    "adjacent_wide_streets": 3,
-    "total_pedestrian_injuries": 79,
-    "total_pedestrian_deaths": 0,
-    "total_crashes": 76
-  },
-  {
-    "name": "TAFT",
-    "borough": "MANHATTAN",
     "adjacent_wide_streets": 5,
-    "total_pedestrian_injuries": 78,
-    "total_pedestrian_deaths": 2,
-    "total_crashes": 78
-  },
-  {
-    "name": "ROOSEVELT II",
-    "borough": "BROOKLYN",
-    "adjacent_wide_streets": 13,
-    "total_pedestrian_injuries": 72,
-    "total_pedestrian_deaths": 1,
-    "total_crashes": 69
-  },
-  {
-    "name": "WEBSTER",
-    "borough": "BRONX",
-    "adjacent_wide_streets": 5,
-    "total_pedestrian_injuries": 72,
-    "total_pedestrian_deaths": 3,
-    "total_crashes": 69
-  },
-  {
-    "name": "LA GUARDIA",
-    "borough": "MANHATTAN",
-    "adjacent_wide_streets": 6,
-    "total_pedestrian_injuries": 71,
-    "total_pedestrian_deaths": 1,
-    "total_crashes": 71
-  },
-  {
-    "name": "TOMPKINS",
-    "borough": "BROOKLYN",
-    "adjacent_wide_streets": 5,
-    "total_pedestrian_injuries": 68,
-    "total_pedestrian_deaths": 0,
-    "total_crashes": 64
-  },
-  {
-    "name": "FHA REPOSSESSED HOUSES (GROUP X)",
-    "borough": "",
-    "adjacent_wide_streets": 6,
-    "total_pedestrian_injuries": 68,
-    "total_pedestrian_deaths": 1,
-    "total_crashes": 68
-  },
-  {
-    "name": "NOSTRAND",
-    "borough": "BROOKLYN",
-    "adjacent_wide_streets": 17,
-    "total_pedestrian_injuries": 68,
-    "total_pedestrian_deaths": 2,
-    "total_crashes": 66
-  },
-  {
-    "name": "KING TOWERS",
-    "borough": "MANHATTAN",
-    "adjacent_wide_streets": 4,
-    "total_pedestrian_injuries": 68,
-    "total_pedestrian_deaths": 2,
-    "total_crashes": 68
-  },
-  {
-    "name": "HUGHES APARTMENTS",
-    "borough": "BROOKLYN",
-    "adjacent_wide_streets": 7,
-    "total_pedestrian_injuries": 67,
-    "total_pedestrian_deaths": 1,
-    "total_crashes": 63
-  },
-  {
-    "name": "WHITMAN",
-    "borough": "BROOKLYN",
-    "adjacent_wide_streets": 9,
-    "total_pedestrian_injuries": 66,
-    "total_pedestrian_deaths": 1,
-    "total_crashes": 64
-  },
-  {
-    "name": "LINCOLN",
-    "borough": "MANHATTAN",
-    "adjacent_wide_streets": 4,
-    "total_pedestrian_injuries": 66,
-    "total_pedestrian_deaths": 1,
-    "total_crashes": 64
-  },
-  {
-    "name": "WOODSON",
-    "borough": "BROOKLYN",
-    "adjacent_wide_streets": 12,
-    "total_pedestrian_injuries": 63,
-    "total_pedestrian_deaths": 0,
-    "total_crashes": 60
-  },
-  {
-    "name": "BAISLEY PARK",
-    "borough": "QUEENS",
-    "adjacent_wide_streets": 3,
-    "total_pedestrian_injuries": 63,
-    "total_pedestrian_deaths": 1,
-    "total_crashes": 57
-  },
-  {
-    "name": "ALBANY",
-    "borough": "BROOKLYN",
-    "adjacent_wide_streets": 10,
-    "total_pedestrian_injuries": 62,
-    "total_pedestrian_deaths": 1,
-    "total_crashes": 59
-  },
-  {
-    "name": "PINK",
-    "borough": "BROOKLYN",
-    "adjacent_wide_streets": 10,
-    "total_pedestrian_injuries": 62,
-    "total_pedestrian_deaths": 0,
-    "total_crashes": 59
-  },
-  {
-    "name": "GLENMORE PLAZA",
-    "borough": "BROOKLYN",
-    "adjacent_wide_streets": 4,
-    "total_pedestrian_injuries": 61,
-    "total_pedestrian_deaths": 1,
-    "total_crashes": 59
-  },
-  {
-    "name": "SOTOMAYOR HOUSES",
-    "borough": "BRONX",
-    "adjacent_wide_streets": 13,
-    "total_pedestrian_injuries": 61,
-    "total_pedestrian_deaths": 1,
-    "total_crashes": 61
-  },
-  {
-    "name": "VLADECK",
-    "borough": "MANHATTAN",
-    "adjacent_wide_streets": 8,
-    "total_pedestrian_injuries": 60,
-    "total_pedestrian_deaths": 6,
-    "total_crashes": 55
-  },
-  {
-    "name": "1162-1176 WASHINGTON AVENUE",
-    "borough": "BRONX",
-    "adjacent_wide_streets": 1,
-    "total_pedestrian_injuries": 58,
-    "total_pedestrian_deaths": 1,
-    "total_crashes": 55
-  },
-  {
-    "name": "GLENWOOD",
-    "borough": "BROOKLYN",
-    "adjacent_wide_streets": 13,
-    "total_pedestrian_injuries": 57,
-    "total_pedestrian_deaths": 1,
-    "total_crashes": 53
-  },
-  {
-    "name": "LOWER EAST SIDE REHAB (GROUP 5)",
-    "borough": "MANHATTAN",
-    "adjacent_wide_streets": 2,
-    "total_pedestrian_injuries": 55,
-    "total_pedestrian_deaths": 0,
-    "total_crashes": 52
-  },
-  {
-    "name": "LOWER EAST SIDE II",
-    "borough": "MANHATTAN",
-    "adjacent_wide_streets": 2,
-    "total_pedestrian_injuries": 54,
-    "total_pedestrian_deaths": 0,
-    "total_crashes": 50
-  },
-  {
-    "name": "FOREST",
-    "borough": "BRONX",
-    "adjacent_wide_streets": 4,
     "total_pedestrian_injuries": 53,
     "total_pedestrian_deaths": 0,
-    "total_crashes": 53
+    "total_crashes": 48
   },
   {
-    "name": "MOTT HAVEN",
-    "borough": "BRONX",
+    "name": "BREVOORT",
+    "borough": "BROOKLYN",
     "adjacent_wide_streets": 4,
-    "total_pedestrian_injuries": 52,
-    "total_pedestrian_deaths": 0,
-    "total_crashes": 50
-  },
-  {
-    "name": "FHA REPOSSESSED HOUSES (GROUP IX)",
-    "borough": "",
-    "adjacent_wide_streets": 8,
-    "total_pedestrian_injuries": 52,
-    "total_pedestrian_deaths": 0,
-    "total_crashes": 52
-  },
-  {
-    "name": "RUTGERS",
-    "borough": "MANHATTAN",
-    "adjacent_wide_streets": 2,
-    "total_pedestrian_injuries": 52,
-    "total_pedestrian_deaths": 1,
-    "total_crashes": 53
-  },
-  {
-    "name": "UNITY PLAZA (SITES 4-27)",
-    "borough": "BROOKLYN",
-    "adjacent_wide_streets": 10,
-    "total_pedestrian_injuries": 51,
-    "total_pedestrian_deaths": 0,
-    "total_crashes": 49
-  },
-  {
-    "name": "SHELTON HOUSE",
-    "borough": "QUEENS",
-    "adjacent_wide_streets": 3,
-    "total_pedestrian_injuries": 51,
-    "total_pedestrian_deaths": 0,
-    "total_crashes": 48
-  },
-  {
-    "name": "TAYLOR STREET-WYTHE AVENUE",
-    "borough": "BROOKLYN",
-    "adjacent_wide_streets": 9,
-    "total_pedestrian_injuries": 51,
-    "total_pedestrian_deaths": 1,
-    "total_crashes": 48
-  },
-  {
-    "name": "BUSHWICK",
-    "borough": "BROOKLYN",
-    "adjacent_wide_streets": 6,
-    "total_pedestrian_injuries": 51,
-    "total_pedestrian_deaths": 0,
-    "total_crashes": 47
-  },
-  {
-    "name": "DYCKMAN",
-    "borough": "MANHATTAN",
-    "adjacent_wide_streets": 1,
-    "total_pedestrian_injuries": 51,
-    "total_pedestrian_deaths": 1,
-    "total_crashes": 52
-  },
-  {
-    "name": "SURFSIDE GARDENS",
-    "borough": "BROOKLYN",
-    "adjacent_wide_streets": 8,
     "total_pedestrian_injuries": 50,
     "total_pedestrian_deaths": 0,
     "total_crashes": 46
   },
   {
-    "name": "MCKINLEY",
-    "borough": "BRONX",
-    "adjacent_wide_streets": 3,
-    "total_pedestrian_injuries": 49,
-    "total_pedestrian_deaths": 0,
-    "total_crashes": 48
-  },
-  {
-    "name": "UNITY PLAZA (SITES 17,24,25A)",
-    "borough": "BROOKLYN",
+    "name": "CARVER",
+    "borough": "MANHATTAN",
     "adjacent_wide_streets": 5,
-    "total_pedestrian_injuries": 49,
-    "total_pedestrian_deaths": 2,
-    "total_crashes": 47
-  },
-  {
-    "name": "SAINT MARY'S PARK",
-    "borough": "BRONX",
-    "adjacent_wide_streets": 3,
     "total_pedestrian_injuries": 48,
-    "total_pedestrian_deaths": 1,
-    "total_crashes": 49
-  },
-  {
-    "name": "HAMMEL",
-    "borough": "QUEENS",
-    "adjacent_wide_streets": 8,
-    "total_pedestrian_injuries": 48,
-    "total_pedestrian_deaths": 2,
-    "total_crashes": 46
-  },
-  {
-    "name": "O'DWYER GARDENS",
-    "borough": "BROOKLYN",
-    "adjacent_wide_streets": 7,
-    "total_pedestrian_injuries": 46,
-    "total_pedestrian_deaths": 1,
-    "total_crashes": 42
-  },
-  {
-    "name": "303 VERNON AVENUE",
-    "borough": "BROOKLYN",
-    "adjacent_wide_streets": 4,
-    "total_pedestrian_injuries": 46,
     "total_pedestrian_deaths": 0,
-    "total_crashes": 45
+    "total_crashes": 43
   },
   {
-    "name": "SOUTH JAMAICA II",
-    "borough": "QUEENS",
+    "name": "KING TOWERS",
+    "borough": "MANHATTAN",
     "adjacent_wide_streets": 6,
     "total_pedestrian_injuries": 45,
     "total_pedestrian_deaths": 0,
-    "total_crashes": 42
-  },
-  {
-    "name": "BORINQUEN PLAZA II",
-    "borough": "BROOKLYN",
-    "adjacent_wide_streets": 3,
-    "total_pedestrian_injuries": 45,
-    "total_pedestrian_deaths": 0,
-    "total_crashes": 45
-  },
-  {
-    "name": "CLINTON",
-    "borough": "MANHATTAN",
-    "adjacent_wide_streets": 3,
-    "total_pedestrian_injuries": 44,
-    "total_pedestrian_deaths": 0,
-    "total_crashes": 43
-  },
-  {
-    "name": "BRACETTI PLAZA",
-    "borough": "MANHATTAN",
-    "adjacent_wide_streets": 1,
-    "total_pedestrian_injuries": 44,
-    "total_pedestrian_deaths": 0,
-    "total_crashes": 41
-  },
-  {
-    "name": "JOHNSON",
-    "borough": "MANHATTAN",
-    "adjacent_wide_streets": 3,
-    "total_pedestrian_injuries": 43,
-    "total_pedestrian_deaths": 1,
-    "total_crashes": 44
-  },
-  {
-    "name": "CAREY GARDENS",
-    "borough": "BROOKLYN",
-    "adjacent_wide_streets": 4,
-    "total_pedestrian_injuries": 43,
-    "total_pedestrian_deaths": 2,
-    "total_crashes": 43
-  },
-  {
-    "name": "GARVEY (GROUP A)",
-    "borough": "BROOKLYN",
-    "adjacent_wide_streets": 3,
-    "total_pedestrian_injuries": 41,
-    "total_pedestrian_deaths": 0,
-    "total_crashes": 41
-  },
-  {
-    "name": "CLAREMONT REHAB (GROUP 4)",
-    "borough": "BRONX",
-    "adjacent_wide_streets": 2,
-    "total_pedestrian_injuries": 41,
-    "total_pedestrian_deaths": 1,
     "total_crashes": 40
   },
   {
-    "name": "CARVER",
+    "name": "TAFT",
     "borough": "MANHATTAN",
-    "adjacent_wide_streets": 3,
+    "adjacent_wide_streets": 6,
+    "total_pedestrian_injuries": 45,
+    "total_pedestrian_deaths": 0,
+    "total_crashes": 40
+  },
+  {
+    "name": "NOSTRAND",
+    "borough": "BROOKLYN",
+    "adjacent_wide_streets": 7,
+    "total_pedestrian_injuries": 40,
+    "total_pedestrian_deaths": 2,
+    "total_crashes": 40
+  },
+  {
+    "name": "LA GUARDIA",
+    "borough": "MANHATTAN",
+    "adjacent_wide_streets": 6,
     "total_pedestrian_injuries": 39,
-    "total_pedestrian_deaths": 1,
+    "total_pedestrian_deaths": 0,
     "total_crashes": 39
   },
   {
-    "name": "ADAMS",
+    "name": "CLASON POINT GARDENS",
     "borough": "BRONX",
-    "adjacent_wide_streets": 2,
+    "adjacent_wide_streets": 10,
     "total_pedestrian_injuries": 37,
     "total_pedestrian_deaths": 0,
-    "total_crashes": 37
+    "total_crashes": 33
   },
   {
-    "name": "FHA REPOSSESSED HOUSES (GROUP I)",
-    "borough": "",
-    "adjacent_wide_streets": 7,
-    "total_pedestrian_injuries": 37,
-    "total_pedestrian_deaths": 0,
-    "total_crashes": 34
-  },
-  {
-    "name": "INGERSOLL",
-    "borough": "BROOKLYN",
-    "adjacent_wide_streets": 3,
-    "total_pedestrian_injuries": 37,
-    "total_pedestrian_deaths": 0,
-    "total_crashes": 36
-  },
-  {
-    "name": "CONEY ISLAND I (SITES 4 & 5)",
-    "borough": "BROOKLYN",
-    "adjacent_wide_streets": 4,
-    "total_pedestrian_injuries": 37,
-    "total_pedestrian_deaths": 1,
-    "total_crashes": 37
-  },
-  {
-    "name": "VLADECK II",
-    "borough": "MANHATTAN",
-    "adjacent_wide_streets": 4,
+    "name": "BRONX RIVER",
+    "borough": "BRONX",
+    "adjacent_wide_streets": 1,
     "total_pedestrian_injuries": 35,
-    "total_pedestrian_deaths": 5,
-    "total_crashes": 30
-  },
-  {
-    "name": "OCEAN BAY APARTMENTS (OCEANSIDE)",
-    "borough": "QUEENS",
-    "adjacent_wide_streets": 8,
-    "total_pedestrian_injuries": 34,
-    "total_pedestrian_deaths": 1,
-    "total_crashes": 32
-  },
-  {
-    "name": "FHA REPOSSESSED HOUSES (GROUP II)",
-    "borough": "",
-    "adjacent_wide_streets": 3,
-    "total_pedestrian_injuries": 33,
-    "total_pedestrian_deaths": 0,
-    "total_crashes": 31
-  },
-  {
-    "name": "LEXINGTON",
-    "borough": "MANHATTAN",
-    "adjacent_wide_streets": 2,
-    "total_pedestrian_injuries": 33,
     "total_pedestrian_deaths": 1,
     "total_crashes": 33
   },
   {
-    "name": "HOWARD",
-    "borough": "BROOKLYN",
-    "adjacent_wide_streets": 6,
-    "total_pedestrian_injuries": 32,
-    "total_pedestrian_deaths": 0,
-    "total_crashes": 30
-  },
-  {
-    "name": "LEHMAN VILLAGE",
+    "name": "LINCOLN",
     "borough": "MANHATTAN",
-    "adjacent_wide_streets": 2,
-    "total_pedestrian_injuries": 32,
-    "total_pedestrian_deaths": 0,
-    "total_crashes": 31
-  },
-  {
-    "name": "REDFERN",
-    "borough": "QUEENS",
     "adjacent_wide_streets": 1,
-    "total_pedestrian_injuries": 32,
-    "total_pedestrian_deaths": 0,
-    "total_crashes": 31
-  },
-  {
-    "name": "BOYNTON AVENUE REHAB",
-    "borough": "BRONX",
-    "adjacent_wide_streets": 3,
-    "total_pedestrian_injuries": 32,
+    "total_pedestrian_injuries": 34,
     "total_pedestrian_deaths": 1,
-    "total_crashes": 32
+    "total_crashes": 34
   },
   {
-    "name": "LOW HOUSES",
-    "borough": "BROOKLYN",
-    "adjacent_wide_streets": 6,
-    "total_pedestrian_injuries": 31,
-    "total_pedestrian_deaths": 0,
-    "total_crashes": 31
-  },
-  {
-    "name": "SEDGWICK",
+    "name": "MITCHEL",
     "borough": "BRONX",
-    "adjacent_wide_streets": 1,
-    "total_pedestrian_injuries": 31,
+    "adjacent_wide_streets": 7,
+    "total_pedestrian_injuries": 34,
     "total_pedestrian_deaths": 0,
-    "total_crashes": 31
+    "total_crashes": 34
   },
   {
-    "name": "GRANT",
-    "borough": "MANHATTAN",
-    "adjacent_wide_streets": 2,
-    "total_pedestrian_injuries": 30,
+    "name": "HABER",
+    "borough": "BROOKLYN",
+    "adjacent_wide_streets": 3,
+    "total_pedestrian_injuries": 34,
     "total_pedestrian_deaths": 0,
     "total_crashes": 29
   },
   {
-    "name": "MARCY",
-    "borough": "BROOKLYN",
-    "adjacent_wide_streets": 3,
-    "total_pedestrian_injuries": 30,
-    "total_pedestrian_deaths": 0,
-    "total_crashes": 26
-  },
-  {
-    "name": "EAST NEW YORK CITY LINE",
-    "borough": "BROOKLYN",
-    "adjacent_wide_streets": 4,
-    "total_pedestrian_injuries": 30,
-    "total_pedestrian_deaths": 0,
-    "total_crashes": 28
-  },
-  {
-    "name": "FARRAGUT",
-    "borough": "BROOKLYN",
-    "adjacent_wide_streets": 2,
-    "total_pedestrian_injuries": 30,
-    "total_pedestrian_deaths": 0,
-    "total_crashes": 28
-  },
-  {
-    "name": "ALBANY II",
+    "name": "CONEY ISLAND",
     "borough": "BROOKLYN",
     "adjacent_wide_streets": 5,
-    "total_pedestrian_injuries": 27,
-    "total_pedestrian_deaths": 1,
-    "total_crashes": 28
-  },
-  {
-    "name": "HYLAN",
-    "borough": "BROOKLYN",
-    "adjacent_wide_streets": 3,
-    "total_pedestrian_injuries": 26,
+    "total_pedestrian_injuries": 32,
     "total_pedestrian_deaths": 0,
-    "total_crashes": 22
+    "total_crashes": 29
   },
   {
-    "name": "MARLBORO",
-    "borough": "BROOKLYN",
-    "adjacent_wide_streets": 14,
-    "total_pedestrian_injuries": 26,
-    "total_pedestrian_deaths": 1,
-    "total_crashes": 25
-  },
-  {
-    "name": "THROGGS NECK",
-    "borough": "BRONX",
-    "adjacent_wide_streets": 3,
-    "total_pedestrian_injuries": 25,
-    "total_pedestrian_deaths": 1,
-    "total_crashes": 24
-  },
-  {
-    "name": "POMONOK",
-    "borough": "QUEENS",
-    "adjacent_wide_streets": 1,
-    "total_pedestrian_injuries": 23,
-    "total_pedestrian_deaths": 0,
-    "total_crashes": 23
-  },
-  {
-    "name": "SEWARD PARK EXTENSION",
+    "name": "CLINTON",
     "borough": "MANHATTAN",
-    "adjacent_wide_streets": 1,
-    "total_pedestrian_injuries": 22,
+    "adjacent_wide_streets": 4,
+    "total_pedestrian_injuries": 31,
     "total_pedestrian_deaths": 0,
-    "total_crashes": 22
-  },
-  {
-    "name": "LAFAYETTE",
-    "borough": "BROOKLYN",
-    "adjacent_wide_streets": 2,
-    "total_pedestrian_injuries": 22,
-    "total_pedestrian_deaths": 0,
-    "total_crashes": 18
-  },
-  {
-    "name": "MELTZER TOWER",
-    "borough": "MANHATTAN",
-    "adjacent_wide_streets": 1,
-    "total_pedestrian_injuries": 21,
-    "total_pedestrian_deaths": 0,
-    "total_crashes": 20
-  },
-  {
-    "name": "GRAVESEND",
-    "borough": "BROOKLYN",
-    "adjacent_wide_streets": 2,
-    "total_pedestrian_injuries": 20,
-    "total_pedestrian_deaths": 0,
-    "total_crashes": 16
+    "total_crashes": 27
   },
   {
     "name": "HUNTS POINT AVENUE REHAB",
     "borough": "BRONX",
     "adjacent_wide_streets": 1,
-    "total_pedestrian_injuries": 20,
+    "total_pedestrian_injuries": 30,
+    "total_pedestrian_deaths": 0,
+    "total_crashes": 30
+  },
+  {
+    "name": "CAREY GARDENS",
+    "borough": "BROOKLYN",
+    "adjacent_wide_streets": 4,
+    "total_pedestrian_injuries": 30,
+    "total_pedestrian_deaths": 0,
+    "total_crashes": 26
+  },
+  {
+    "name": "AMSTERDAM",
+    "borough": "MANHATTAN",
+    "adjacent_wide_streets": 6,
+    "total_pedestrian_injuries": 29,
     "total_pedestrian_deaths": 1,
-    "total_crashes": 20
+    "total_crashes": 30
+  },
+  {
+    "name": "GRANT",
+    "borough": "MANHATTAN",
+    "adjacent_wide_streets": 7,
+    "total_pedestrian_injuries": 28,
+    "total_pedestrian_deaths": 1,
+    "total_crashes": 29
   },
   {
     "name": "DOUGLASS I",
     "borough": "MANHATTAN",
-    "adjacent_wide_streets": 1,
-    "total_pedestrian_injuries": 20,
+    "adjacent_wide_streets": 3,
+    "total_pedestrian_injuries": 28,
     "total_pedestrian_deaths": 0,
-    "total_crashes": 18
+    "total_crashes": 26
   },
   {
-    "name": "DOUGLASS II",
+    "name": "BROWNSVILLE",
+    "borough": "BROOKLYN",
+    "adjacent_wide_streets": 1,
+    "total_pedestrian_injuries": 26,
+    "total_pedestrian_deaths": 0,
+    "total_crashes": 25
+  },
+  {
+    "name": "HUGHES APARTMENTS",
+    "borough": "BROOKLYN",
+    "adjacent_wide_streets": 1,
+    "total_pedestrian_injuries": 26,
+    "total_pedestrian_deaths": 0,
+    "total_crashes": 25
+  },
+  {
+    "name": "VAN DYKE I",
+    "borough": "BROOKLYN",
+    "adjacent_wide_streets": 1,
+    "total_pedestrian_injuries": 26,
+    "total_pedestrian_deaths": 0,
+    "total_crashes": 25
+  },
+  {
+    "name": "BARUCH",
+    "borough": "MANHATTAN",
+    "adjacent_wide_streets": 10,
+    "total_pedestrian_injuries": 25,
+    "total_pedestrian_deaths": 0,
+    "total_crashes": 25
+  },
+  {
+    "name": "GOMPERS",
+    "borough": "MANHATTAN",
+    "adjacent_wide_streets": 4,
+    "total_pedestrian_injuries": 25,
+    "total_pedestrian_deaths": 1,
+    "total_crashes": 25
+  },
+  {
+    "name": "MORRIS II",
+    "borough": "BRONX",
+    "adjacent_wide_streets": 1,
+    "total_pedestrian_injuries": 25,
+    "total_pedestrian_deaths": 0,
+    "total_crashes": 22
+  },
+  {
+    "name": "PELHAM PARKWAY",
+    "borough": "BRONX",
+    "adjacent_wide_streets": 5,
+    "total_pedestrian_injuries": 24,
+    "total_pedestrian_deaths": 0,
+    "total_crashes": 24
+  },
+  {
+    "name": "RUTGERS",
     "borough": "MANHATTAN",
     "adjacent_wide_streets": 1,
-    "total_pedestrian_injuries": 20,
+    "total_pedestrian_injuries": 24,
     "total_pedestrian_deaths": 0,
-    "total_crashes": 18
+    "total_crashes": 24
   },
   {
-    "name": "FHA REPOSSESSED HOUSES (GROUP VIII)",
-    "borough": "",
-    "adjacent_wide_streets": 1,
+    "name": "SOTOMAYOR HOUSES",
+    "borough": "BRONX",
+    "adjacent_wide_streets": 5,
+    "total_pedestrian_injuries": 23,
+    "total_pedestrian_deaths": 0,
+    "total_crashes": 23
+  },
+  {
+    "name": "WILSON",
+    "borough": "MANHATTAN",
+    "adjacent_wide_streets": 2,
+    "total_pedestrian_injuries": 23,
+    "total_pedestrian_deaths": 1,
+    "total_crashes": 24
+  },
+  {
+    "name": "PATTERSON",
+    "borough": "BRONX",
+    "adjacent_wide_streets": 5,
     "total_pedestrian_injuries": 20,
     "total_pedestrian_deaths": 0,
     "total_crashes": 19
   },
   {
-    "name": "CHELSEA",
+    "name": "SEWARD PARK EXTENSION",
     "borough": "MANHATTAN",
-    "adjacent_wide_streets": 1,
+    "adjacent_wide_streets": 2,
     "total_pedestrian_injuries": 19,
-    "total_pedestrian_deaths": 3,
-    "total_crashes": 22
+    "total_pedestrian_deaths": 0,
+    "total_crashes": 17
+  },
+  {
+    "name": "DOUGLASS II",
+    "borough": "MANHATTAN",
+    "adjacent_wide_streets": 2,
+    "total_pedestrian_injuries": 19,
+    "total_pedestrian_deaths": 0,
+    "total_crashes": 18
   },
   {
     "name": "GUN HILL",
@@ -933,226 +309,138 @@
     "adjacent_wide_streets": 1,
     "total_pedestrian_injuries": 18,
     "total_pedestrian_deaths": 0,
-    "total_crashes": 18
-  },
-  {
-    "name": "FHA REPOSSESSED HOUSES (GROUP VI)",
-    "borough": "",
-    "adjacent_wide_streets": 4,
-    "total_pedestrian_injuries": 17,
-    "total_pedestrian_deaths": 0,
     "total_crashes": 17
   },
   {
-    "name": "POLO GROUNDS TOWERS",
+    "name": "TWO BRIDGES URA (SITE 7)",
     "borough": "MANHATTAN",
+    "adjacent_wide_streets": 2,
+    "total_pedestrian_injuries": 17,
+    "total_pedestrian_deaths": 1,
+    "total_crashes": 16
+  },
+  {
+    "name": "HAMMEL",
+    "borough": "QUEENS",
     "adjacent_wide_streets": 3,
     "total_pedestrian_injuries": 17,
     "total_pedestrian_deaths": 0,
-    "total_crashes": 17
-  },
-  {
-    "name": "RIIS",
-    "borough": "MANHATTAN",
-    "adjacent_wide_streets": 5,
-    "total_pedestrian_injuries": 16,
-    "total_pedestrian_deaths": 1,
-    "total_crashes": 17
-  },
-  {
-    "name": "HOLMES TOWERS",
-    "borough": "MANHATTAN",
-    "adjacent_wide_streets": 1,
-    "total_pedestrian_injuries": 16,
-    "total_pedestrian_deaths": 1,
-    "total_crashes": 15
-  },
-  {
-    "name": "EAST 152ND STREET-COURTLANDT AVENUE",
-    "borough": "BRONX",
-    "adjacent_wide_streets": 2,
-    "total_pedestrian_injuries": 16,
-    "total_pedestrian_deaths": 0,
-    "total_crashes": 16
+    "total_crashes": 14
   },
   {
     "name": "CONEY ISLAND I (SITE 1B)",
     "borough": "BROOKLYN",
     "adjacent_wide_streets": 3,
-    "total_pedestrian_injuries": 16,
-    "total_pedestrian_deaths": 1,
+    "total_pedestrian_injuries": 17,
+    "total_pedestrian_deaths": 0,
     "total_crashes": 16
   },
   {
-    "name": "AMSTERDAM",
-    "borough": "MANHATTAN",
-    "adjacent_wide_streets": 2,
-    "total_pedestrian_injuries": 15,
-    "total_pedestrian_deaths": 0,
-    "total_crashes": 15
-  },
-  {
-    "name": "ASTORIA",
-    "borough": "QUEENS",
-    "adjacent_wide_streets": 2,
-    "total_pedestrian_injuries": 15,
-    "total_pedestrian_deaths": 0,
-    "total_crashes": 14
-  },
-  {
-    "name": "BERRY",
-    "borough": "STATEN ISLAND",
-    "adjacent_wide_streets": 2,
-    "total_pedestrian_injuries": 15,
-    "total_pedestrian_deaths": 0,
-    "total_crashes": 15
-  },
-  {
-    "name": "1471 WATSON AVENUE",
+    "name": "MOTT HAVEN",
     "borough": "BRONX",
+    "adjacent_wide_streets": 3,
+    "total_pedestrian_injuries": 16,
+    "total_pedestrian_deaths": 0,
+    "total_crashes": 16
+  },
+  {
+    "name": "SURFSIDE GARDENS",
+    "borough": "BROOKLYN",
     "adjacent_wide_streets": 3,
     "total_pedestrian_injuries": 15,
     "total_pedestrian_deaths": 0,
     "total_crashes": 15
   },
   {
-    "name": "KINGSBOROUGH EXTENSION",
+    "name": "MARLBORO",
     "borough": "BROOKLYN",
-    "adjacent_wide_streets": 1,
+    "adjacent_wide_streets": 13,
     "total_pedestrian_injuries": 14,
     "total_pedestrian_deaths": 0,
     "total_crashes": 14
   },
   {
-    "name": "WEST TREMONT AVENUE-SEDGWICK AVENUE AREA",
+    "name": "THROGGS NECK",
     "borough": "BRONX",
-    "adjacent_wide_streets": 1,
+    "adjacent_wide_streets": 10,
     "total_pedestrian_injuries": 14,
     "total_pedestrian_deaths": 0,
     "total_crashes": 14
   },
   {
-    "name": "TODT HILL",
-    "borough": "STATEN ISLAND",
-    "adjacent_wide_streets": 7,
-    "total_pedestrian_injuries": 14,
-    "total_pedestrian_deaths": 1,
-    "total_crashes": 13
-  },
-  {
-    "name": "ATLANTIC TERMINAL SITE 4B",
+    "name": "O'DWYER GARDENS",
     "borough": "BROOKLYN",
-    "adjacent_wide_streets": 2,
+    "adjacent_wide_streets": 4,
     "total_pedestrian_injuries": 13,
-    "total_pedestrian_deaths": 0,
+    "total_pedestrian_deaths": 1,
+    "total_crashes": 14
+  },
+  {
+    "name": "CONEY ISLAND I (SITE 8)",
+    "borough": "BROOKLYN",
+    "adjacent_wide_streets": 3,
+    "total_pedestrian_injuries": 12,
+    "total_pedestrian_deaths": 1,
     "total_crashes": 13
   },
   {
-    "name": "WALD",
-    "borough": "MANHATTAN",
+    "name": "CASTLE HILL",
+    "borough": "BRONX",
     "adjacent_wide_streets": 2,
-    "total_pedestrian_injuries": 12,
-    "total_pedestrian_deaths": 0,
-    "total_crashes": 11
-  },
-  {
-    "name": "MARINER'S HARBOR",
-    "borough": "STATEN ISLAND",
-    "adjacent_wide_streets": 5,
-    "total_pedestrian_injuries": 11,
-    "total_pedestrian_deaths": 0,
-    "total_crashes": 11
-  },
-  {
-    "name": "VAN DYKE II",
-    "borough": "BROOKLYN",
-    "adjacent_wide_streets": 5,
-    "total_pedestrian_injuries": 11,
-    "total_pedestrian_deaths": 0,
-    "total_crashes": 9
-  },
-  {
-    "name": "COOPER PARK",
-    "borough": "BROOKLYN",
-    "adjacent_wide_streets": 5,
     "total_pedestrian_injuries": 11,
     "total_pedestrian_deaths": 1,
     "total_crashes": 11
   },
   {
-    "name": "PARKSIDE",
+    "name": "THROGGS NECK ADDITION",
     "borough": "BRONX",
-    "adjacent_wide_streets": 1,
+    "adjacent_wide_streets": 7,
     "total_pedestrian_injuries": 10,
     "total_pedestrian_deaths": 0,
     "total_crashes": 10
   },
   {
-    "name": "RIIS II",
-    "borough": "MANHATTAN",
+    "name": "COOPER PARK",
+    "borough": "BROOKLYN",
     "adjacent_wide_streets": 1,
     "total_pedestrian_injuries": 10,
+    "total_pedestrian_deaths": 2,
+    "total_crashes": 11
+  },
+  {
+    "name": "830 AMSTERDAM AVENUE",
+    "borough": "MANHATTAN",
+    "adjacent_wide_streets": 1,
+    "total_pedestrian_injuries": 9,
     "total_pedestrian_deaths": 0,
     "total_crashes": 9
   },
   {
-    "name": "RED HOOK WEST",
-    "borough": "BROOKLYN",
+    "name": "PARKSIDE",
+    "borough": "BRONX",
+    "adjacent_wide_streets": 4,
+    "total_pedestrian_injuries": 9,
+    "total_pedestrian_deaths": 0,
+    "total_crashes": 9
+  },
+  {
+    "name": "RANDALL AVENUE-BALCOM AVENUE",
+    "borough": "BRONX",
     "adjacent_wide_streets": 6,
-    "total_pedestrian_injuries": 9,
-    "total_pedestrian_deaths": 0,
-    "total_crashes": 9
-  },
-  {
-    "name": "GOWANUS",
-    "borough": "BROOKLYN",
-    "adjacent_wide_streets": 1,
-    "total_pedestrian_injuries": 9,
-    "total_pedestrian_deaths": 0,
-    "total_crashes": 8
-  },
-  {
-    "name": "QUEENSBRIDGE SOUTH",
-    "borough": "QUEENS",
-    "adjacent_wide_streets": 1,
-    "total_pedestrian_injuries": 9,
-    "total_pedestrian_deaths": 0,
-    "total_crashes": 9
-  },
-  {
-    "name": "FHA REPOSSESSED HOUSES (GROUP III)",
-    "borough": "",
-    "adjacent_wide_streets": 2,
-    "total_pedestrian_injuries": 8,
-    "total_pedestrian_deaths": 0,
-    "total_crashes": 7
-  },
-  {
-    "name": "QUEENSBRIDGE NORTH",
-    "borough": "QUEENS",
-    "adjacent_wide_streets": 1,
-    "total_pedestrian_injuries": 8,
-    "total_pedestrian_deaths": 1,
-    "total_crashes": 9
-  },
-  {
-    "name": "SOUTH JAMAICA I",
-    "borough": "QUEENS",
-    "adjacent_wide_streets": 2,
-    "total_pedestrian_injuries": 7,
+    "total_pedestrian_injuries": 6,
     "total_pedestrian_deaths": 0,
     "total_crashes": 6
   },
   {
-    "name": "CONEY ISLAND",
-    "borough": "BROOKLYN",
-    "adjacent_wide_streets": 3,
-    "total_pedestrian_injuries": 7,
+    "name": "REHAB PROGRAM (DOUGLASS REHABS)",
+    "borough": "MANHATTAN",
+    "adjacent_wide_streets": 2,
+    "total_pedestrian_injuries": 5,
     "total_pedestrian_deaths": 0,
-    "total_crashes": 7
+    "total_crashes": 5
   },
   {
-    "name": "WYCKOFF GARDENS",
+    "name": "BREUKELEN",
     "borough": "BROOKLYN",
     "adjacent_wide_streets": 1,
     "total_pedestrian_injuries": 5,
@@ -1160,99 +448,19 @@
     "total_crashes": 5
   },
   {
-    "name": "SOUTH BEACH",
-    "borough": "STATEN ISLAND",
-    "adjacent_wide_streets": 7,
-    "total_pedestrian_injuries": 4,
-    "total_pedestrian_deaths": 0,
-    "total_crashes": 4
-  },
-  {
-    "name": "FHA REPOSSESSED HOUSES (GROUP IV)",
+    "name": "FHA REPOSSESSED HOUSES (GROUP II)",
     "borough": "",
     "adjacent_wide_streets": 2,
-    "total_pedestrian_injuries": 4,
+    "total_pedestrian_injuries": 2,
     "total_pedestrian_deaths": 0,
-    "total_crashes": 4
+    "total_crashes": 2
   },
   {
-    "name": "RANDALL AVENUE-BALCOM AVENUE",
+    "name": "SOUNDVIEW",
     "borough": "BRONX",
     "adjacent_wide_streets": 1,
-    "total_pedestrian_injuries": 4,
+    "total_pedestrian_injuries": 1,
     "total_pedestrian_deaths": 0,
-    "total_crashes": 4
-  },
-  {
-    "name": "THROGGS NECK ADDITION",
-    "borough": "BRONX",
-    "adjacent_wide_streets": 1,
-    "total_pedestrian_injuries": 4,
-    "total_pedestrian_deaths": 0,
-    "total_crashes": 4
-  },
-  {
-    "name": "FHA REPOSSESSED HOUSES (GROUP VII)",
-    "borough": "",
-    "adjacent_wide_streets": 1,
-    "total_pedestrian_injuries": 3,
-    "total_pedestrian_deaths": 0,
-    "total_crashes": 3
-  },
-  {
-    "name": "REHAB PROGRAM (COLLEGE POINT)",
-    "borough": "QUEENS",
-    "adjacent_wide_streets": 3,
-    "total_pedestrian_injuries": 2,
-    "total_pedestrian_deaths": 0,
-    "total_crashes": 2
-  },
-  {
-    "name": "BARUCH",
-    "borough": "MANHATTAN",
-    "adjacent_wide_streets": 2,
-    "total_pedestrian_injuries": 2,
-    "total_pedestrian_deaths": 0,
-    "total_crashes": 2
-  },
-  {
-    "name": "EAST RIVER",
-    "borough": "MANHATTAN",
-    "adjacent_wide_streets": 1,
-    "total_pedestrian_injuries": 2,
-    "total_pedestrian_deaths": 0,
-    "total_crashes": 2
-  },
-  {
-    "name": "WILSON",
-    "borough": "MANHATTAN",
-    "adjacent_wide_streets": 1,
-    "total_pedestrian_injuries": 2,
-    "total_pedestrian_deaths": 0,
-    "total_crashes": 2
-  },
-  {
-    "name": "RED HOOK EAST",
-    "borough": "BROOKLYN",
-    "adjacent_wide_streets": 1,
-    "total_pedestrian_injuries": 0,
-    "total_pedestrian_deaths": 0,
-    "total_crashes": 0
-  },
-  {
-    "name": "BEACH 41ST STREET-BEACH CHANNEL DRIVE",
-    "borough": "QUEENS",
-    "adjacent_wide_streets": 1,
-    "total_pedestrian_injuries": 0,
-    "total_pedestrian_deaths": 0,
-    "total_crashes": 0
-  },
-  {
-    "name": "RANGEL",
-    "borough": "MANHATTAN",
-    "adjacent_wide_streets": 1,
-    "total_pedestrian_injuries": 0,
-    "total_pedestrian_deaths": 0,
-    "total_crashes": 0
+    "total_crashes": 1
   }
 ]

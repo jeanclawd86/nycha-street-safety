@@ -179,11 +179,11 @@ export default function MapView({ nychaData, segmentsData, allNychaData, devData
               ["get", "pedestrian_injuries"],
               0, "#6b7280",
               1, "#22c55e",
-              15, "#84cc16",
-              35, "#eab308",
-              60, "#f97316",
-              100, "#dc2626",
-              150, "#7f1d1d",
+              5, "#84cc16",
+              10, "#eab308",
+              20, "#f97316",
+              30, "#dc2626",
+              45, "#7f1d1d",
             ],
             "line-width": [
               "interpolate", ["linear"], ["zoom"],
@@ -262,10 +262,17 @@ export default function MapView({ nychaData, segmentsData, allNychaData, devData
             (props.pedestrian_injuries || 0) >= 15 ? "#f97316" :
             (props.pedestrian_injuries || 0) >= 5 ? "#eab308" : "#22c55e";
 
+          const speedLabel = props.speed_limit ? `${props.speed_limit} mph` : "N/A";
+          const lanesLabel = props.travel_lanes ? `${props.travel_lanes} travel / ${props.total_lanes || '?'} total` : "N/A";
+
           const html = `
             <div style="font-family: system-ui, sans-serif; font-size: 13px; line-height: 1.5;">
               <div style="font-weight: 700; font-size: 15px; margin-bottom: 4px;">${props.street_name || "Unknown Street"}</div>
-              <div style="color: #94a3b8; margin-bottom: 8px;">Width: <strong style="color: #e2e8f0;">${props.width || "?"}ft</strong> curb-to-curb</div>
+              <div style="display: flex; gap: 8px; color: #94a3b8; margin-bottom: 8px; font-size: 12px;">
+                <span>Width: <strong style="color: #e2e8f0;">${props.width || "?"}ft</strong></span>
+                <span>Speed: <strong style="color: #e2e8f0;">${speedLabel}</strong></span>
+                <span>Lanes: <strong style="color: #e2e8f0;">${lanesLabel}</strong></span>
+              </div>
               <div style="display: grid; grid-template-columns: auto auto; gap: 2px 16px;">
                 <span style="color: #94a3b8;">Ped. Injuries:</span>
                 <span style="font-weight: 600; color: ${injuryColor};">${props.pedestrian_injuries || 0}</span>

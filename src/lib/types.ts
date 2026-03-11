@@ -17,17 +17,17 @@ export interface Development {
   severity: SeverityLevel;
 }
 
-// 7-tier severity scale based on actual data distribution (0–238, median 44)
+// 7-tier severity scale based on actual data distribution (1–85, median 25)
 export type SeverityLevel = "critical" | "very-high" | "high" | "elevated" | "moderate" | "low" | "minimal";
 
 export function getSeverity(injuries: number, deaths: number): Development["severity"] {
-  if (injuries >= 150 || deaths >= 3) return "critical";    // top ~5% (7 devs)
-  if (injuries >= 100) return "very-high";                   // P90+ (15 devs)
-  if (injuries >= 60) return "high";                         // P75+ (21 devs)
-  if (injuries >= 35) return "elevated";                     // ~median (28 devs)
-  if (injuries >= 15) return "moderate";                     // P25+ (27 devs)
-  if (injuries >= 1) return "low";                           // some injuries (17 devs)
-  return "minimal";                                          // 0 injuries (3 devs)
+  if (injuries >= 60 || deaths >= 2) return "critical";      // top tier
+  if (injuries >= 45) return "very-high";                     // P85+
+  if (injuries >= 30) return "high";                          // P65+
+  if (injuries >= 20) return "elevated";                      // ~median
+  if (injuries >= 10) return "moderate";                      // P25+
+  if (injuries >= 1) return "low";                            // some injuries
+  return "minimal";                                           // 0 injuries
 }
 
 export const SEVERITY_COLORS: Record<Development["severity"], string> = {
@@ -41,12 +41,12 @@ export const SEVERITY_COLORS: Record<Development["severity"], string> = {
 };
 
 export const SEVERITY_LABELS: Record<Development["severity"], string> = {
-  critical: "Critical (150+ injuries or 3+ deaths)",
-  "very-high": "Very High (100–149 injuries)",
-  high: "High (60–99 injuries)",
-  elevated: "Elevated (35–59 injuries)",
-  moderate: "Moderate (15–34 injuries)",
-  low: "Low (1–14 injuries)",
+  critical: "Critical (60+ injuries or 2+ deaths)",
+  "very-high": "Very High (45–59 injuries)",
+  high: "High (30–44 injuries)",
+  elevated: "Elevated (20–29 injuries)",
+  moderate: "Moderate (10–19 injuries)",
+  low: "Low (1–9 injuries)",
   minimal: "Minimal (0 injuries)",
 };
 
