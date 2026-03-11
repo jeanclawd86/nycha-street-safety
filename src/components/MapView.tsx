@@ -49,8 +49,31 @@ export default function MapView({ nychaData, segmentsData, allNychaData, devData
 
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
-      // navigation-night has better road visibility on dark background
-      style: "mapbox://styles/mapbox/navigation-night-v1",
+      // Use a minimal style with free CARTO dark basemap tiles (no token needed for basemap)
+      style: {
+        version: 8,
+        sources: {
+          "carto-dark": {
+            type: "raster",
+            tiles: [
+              "https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png",
+              "https://b.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png",
+              "https://c.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png",
+            ],
+            tileSize: 256,
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+          },
+        },
+        layers: [
+          {
+            id: "carto-dark-layer",
+            type: "raster",
+            source: "carto-dark",
+            minzoom: 0,
+            maxzoom: 20,
+          },
+        ],
+      },
       center: [-73.93, 40.75],
       zoom: 11.5,
       minZoom: 9,
@@ -66,16 +89,6 @@ export default function MapView({ nychaData, segmentsData, allNychaData, devData
       if (nychaData) {
         m.addSource("nycha", { type: "geojson", data: nychaData });
 
-        // Find the first symbol layer (labels) to insert below
-        const layers = m.getStyle().layers || [];
-        let firstSymbolId: string | undefined;
-        for (const layer of layers) {
-          if (layer.type === "symbol") {
-            firstSymbolId = layer.id;
-            break;
-          }
-        }
-
         m.addLayer({
           id: "nycha-fill",
           type: "fill",
@@ -89,7 +102,7 @@ export default function MapView({ nychaData, segmentsData, allNychaData, devData
               0.35,
             ],
           },
-        }, firstSymbolId); // Insert below labels
+        });
 
         m.addLayer({
           id: "nycha-outline",
