@@ -11,6 +11,22 @@ const MapView = dynamic(() => import("@/components/MapView"), { ssr: false });
 
 type ViewMode = "map" | "table" | "split";
 
+function StatChip({ value, total, label, color }: { value: number; total?: number; label: string; color?: string }) {
+  const colorClasses = {
+    yellow: "text-yellow-400",
+    red: "text-red-400",
+    default: "text-gray-200",
+  };
+  const textClass = colorClasses[color as keyof typeof colorClasses] || colorClasses.default;
+  return (
+    <div className="flex items-center gap-1 px-2 py-0.5 bg-[#242836] rounded text-[11px]">
+      <span className={`font-semibold ${textClass}`}>{value.toLocaleString()}</span>
+      {total !== undefined && <span className="text-gray-600">/{total}</span>}
+      <span className="text-gray-500">{label}</span>
+    </div>
+  );
+}
+
 export default function Home() {
   const [view, setView] = useState<ViewMode>("map");
   const [nychaData, setNychaData] = useState<GeoJSON.FeatureCollection | null>(null);
@@ -132,27 +148,20 @@ export default function Home() {
   const totalFilteredInjuries = filteredDevs.reduce((s, d) => s + d.total_pedestrian_injuries, 0);
   const totalFilteredDeaths = filteredDevs.reduce((s, d) => s + d.total_pedestrian_deaths, 0);
 
+  const filteredSegmentCount = filteredSegments?.features.length || 0;
+
   return (
     <div className="flex flex-col h-screen bg-[#0f1117]">
       {/* Header */}
-      <header className="flex items-center justify-between px-6 py-3 bg-[#1a1d27] border-b border-[#242836] shrink-0">
-        <div className="flex items-center gap-4">
-          <h1 className="text-lg font-bold tracking-tight">NYCHA Street Safety</h1>
+      <header className="flex items-center justify-between px-4 sm:px-6 py-2.5 bg-[#1a1d27] border-b border-[#242836] shrink-0">
+        <div className="flex items-center gap-3">
+          <h1 className="text-base sm:text-lg font-bold tracking-tight whitespace-nowrap">NYCHA Street Safety</h1>
           {!loading && devData && (
-            <div className="hidden sm:flex items-center gap-4 text-xs text-gray-400 ml-4">
-              <span>
-                <span className="text-gray-200 font-medium">{filteredDevs.length}</span> of{" "}
-                {devData.length} developments
-              </span>
-              <span className="text-[#363b4e]">|</span>
-              <span>
-                <span className="text-yellow-400 font-medium">{totalFilteredInjuries.toLocaleString()}</span>{" "}
-                injuries
-              </span>
-              <span className="text-[#363b4e]">|</span>
-              <span>
-                <span className="text-red-400 font-medium">{totalFilteredDeaths}</span> deaths
-              </span>
+            <div className="hidden md:flex items-center gap-2 ml-2">
+              <StatChip value={filteredDevs.length} total={devData.length} label="devs" />
+              <StatChip value={totalFilteredInjuries} label="injuries" color="yellow" />
+              <StatChip value={totalFilteredDeaths} label="deaths" color="red" />
+              <StatChip value={filteredSegments?.features.length || 0} label="segments" />
             </div>
           )}
         </div>
@@ -163,11 +172,11 @@ export default function Home() {
               <button
                 key={v}
                 onClick={() => setView(v)}
-                className={`px-4 py-1.5 text-sm rounded-md transition-colors capitalize ${
+                className={`px-3 sm:px-4 py-1.5 text-xs sm:text-sm rounded-md transition-colors capitalize ${
                   view === v ? "bg-blue-600 text-white" : "text-gray-400 hover:text-gray-200"
                 }`}
               >
-                {v}
+                {v === "map" ? "🗺 Map" : v === "table" ? "📊 Table" : "⬜ Split"}
               </button>
             ))}
           </div>
