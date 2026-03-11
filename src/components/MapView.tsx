@@ -177,11 +177,13 @@ export default function MapView({ nychaData, segmentsData, allNychaData, devData
               "interpolate",
               ["linear"],
               ["get", "pedestrian_injuries"],
-              0, "#22c55e",
-              5, "#eab308",
-              15, "#f97316",
-              30, "#ef4444",
-              60, "#dc2626",
+              0, "#6b7280",
+              1, "#22c55e",
+              15, "#84cc16",
+              35, "#eab308",
+              60, "#f97316",
+              100, "#dc2626",
+              150, "#7f1d1d",
             ],
             "line-width": [
               "interpolate", ["linear"], ["zoom"],
@@ -292,7 +294,7 @@ export default function MapView({ nychaData, segmentsData, allNychaData, devData
           if (!props._visible) return;
           
           const dev = devLookup.current.get(props.name);
-          const severity = dev?.severity || "none";
+          const severity = dev?.severity || "minimal";
           const color = SEVERITY_COLORS[severity];
           
           const html = `

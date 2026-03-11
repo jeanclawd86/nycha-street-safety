@@ -13,11 +13,13 @@ interface TableViewProps {
 }
 
 const SEVERITY_ORDER: Record<string, number> = {
-  critical: 4,
-  high: 3,
+  critical: 6,
+  "very-high": 5,
+  high: 4,
+  elevated: 3,
   moderate: 2,
   low: 1,
-  none: 0,
+  minimal: 0,
 };
 
 export default function TableView({ data, nychaData, onSelectDevelopment, selectedDev }: TableViewProps) {
@@ -132,9 +134,11 @@ export default function TableView({ data, nychaData, onSelectDevelopment, select
                   <td className="px-4 py-3 text-right">{dev.adjacent_wide_streets}</td>
                   <td className="px-4 py-3 text-right">
                     <span className={
-                      dev.total_pedestrian_injuries >= 30 ? "text-red-400 font-semibold" :
-                      dev.total_pedestrian_injuries >= 15 ? "text-orange-400 font-semibold" :
-                      dev.total_pedestrian_injuries >= 5 ? "text-yellow-400" : "text-gray-300"
+                      dev.total_pedestrian_injuries >= 150 ? "text-red-700 font-bold" :
+                      dev.total_pedestrian_injuries >= 100 ? "text-red-400 font-semibold" :
+                      dev.total_pedestrian_injuries >= 60 ? "text-orange-400 font-semibold" :
+                      dev.total_pedestrian_injuries >= 35 ? "text-yellow-400" :
+                      dev.total_pedestrian_injuries >= 15 ? "text-lime-400" : "text-gray-300"
                     }>
                       {dev.total_pedestrian_injuries}
                     </span>

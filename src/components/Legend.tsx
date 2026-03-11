@@ -3,7 +3,7 @@
 import { SEVERITY_COLORS, SEVERITY_LABELS } from "@/lib/types";
 
 export default function Legend() {
-  const severities = ["critical", "high", "moderate", "low", "none"] as const;
+  const severities = ["critical", "very-high", "high", "elevated", "moderate", "low", "minimal"] as const;
 
   return (
     <div className="absolute bottom-6 left-6 bg-[#1a1d27]/90 backdrop-blur-sm rounded-lg px-4 py-3 text-xs border border-[#363b4e] z-10">
@@ -20,11 +20,13 @@ export default function Legend() {
         <div className="font-semibold mb-1.5 text-gray-300">Street Segments</div>
         <div className="flex items-center gap-3">
           {[
-            { color: "#22c55e", label: "0 injuries" },
-            { color: "#eab308", label: "1–5" },
-            { color: "#f97316", label: "6–15" },
-            { color: "#ef4444", label: "16–30" },
-            { color: "#dc2626", label: "30+" },
+            { color: "#6b7280", label: "0" },
+            { color: "#22c55e", label: "1–14" },
+            { color: "#84cc16", label: "15–34" },
+            { color: "#eab308", label: "35–59" },
+            { color: "#f97316", label: "60–99" },
+            { color: "#dc2626", label: "100–149" },
+            { color: "#7f1d1d", label: "150+" },
           ].map((item) => (
             <div key={item.label} className="flex items-center gap-1.5">
               <div className="w-4 h-1 rounded-full" style={{ backgroundColor: item.color }} />
