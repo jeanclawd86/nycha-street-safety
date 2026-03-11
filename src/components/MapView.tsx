@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useCallback } from "react";
 import mapboxgl from "mapbox-gl";
-import { Development, getSeverity, SEVERITY_COLORS } from "@/lib/types";
+import { Development, SEVERITY_COLORS } from "@/lib/types";
 
 interface MapViewProps {
   nychaData: GeoJSON.FeatureCollection | null;
@@ -19,35 +19,25 @@ export default function MapView({ nychaData, segmentsData, allNychaData, devData
   const popupRef = useRef<mapboxgl.Popup | null>(null);
   const devLookup = useRef<Map<string, Development>>(new Map());
 
-  // Keep dev lookup fresh
   useEffect(() => {
     const m = new Map<string, Development>();
     devData.forEach((d) => m.set(d.name, d));
     devLookup.current = m;
   }, [devData]);
 
-  // Build color expression for NYCHA polygons based on severity
   const buildNychaColorExpr = useCallback(() => {
-    const expr: (string | string[] | boolean)[] = ["case"];
-    // Hidden (filtered out)
-    expr.push(["==", ["get", "_visible"], false] as unknown as string[]);
-    expr.push("#1a1d27" as unknown as boolean); // nearly invisible
-
-    // Color by severity based on devData
     const severityByName = new Map<string, string>();
     devData.forEach((d) => {
       severityByName.set(d.name, SEVERITY_COLORS[d.severity]);
     });
 
-    // Create match expression for names we know about
     return [
       "case",
       ["==", ["get", "_visible"], false],
       "rgba(30,33,47,0.1)",
-      // Use match for known developments
       ["match", ["get", "name"],
         ...Array.from(severityByName.entries()).flatMap(([name, color]) => [name, color]),
-        "#4b5563" // default gray
+        "#4b5563"
       ]
     ];
   }, [devData]);
@@ -59,9 +49,12 @@ export default function MapView({ nychaData, segmentsData, allNychaData, devData
 
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
+      // Use streets style so basemap roads/labels are visible
       style: "mapbox://styles/mapbox/dark-v11",
-      center: [-73.95, 40.73],
-      zoom: 11,
+      center: [-73.93, 40.75],
+      zoom: 11.5,
+      minZoom: 9,
+      maxZoom: 18,
     });
 
     map.current.addControl(new mapboxgl.NavigationControl(), "top-right");
@@ -69,9 +62,19 @@ export default function MapView({ nychaData, segmentsData, allNychaData, devData
     map.current.on("load", () => {
       const m = map.current!;
 
-      // NYCHA polygons
+      // NYCHA polygons - add BELOW road labels so streets remain readable
       if (nychaData) {
         m.addSource("nycha", { type: "geojson", data: nychaData });
+
+        // Find the first symbol layer (labels) to insert below
+        const layers = m.getStyle().layers || [];
+        let firstSymbolId: string | undefined;
+        for (const layer of layers) {
+          if (layer.type === "symbol") {
+            firstSymbolId = layer.id;
+            break;
+          }
+        }
 
         m.addLayer({
           id: "nycha-fill",
@@ -83,10 +86,10 @@ export default function MapView({ nychaData, segmentsData, allNychaData, devData
               "case",
               ["==", ["get", "_visible"], false],
               0.05,
-              0.45,
+              0.35,
             ],
           },
-        });
+        }, firstSymbolId); // Insert below labels
 
         m.addLayer({
           id: "nycha-outline",
@@ -100,38 +103,57 @@ export default function MapView({ nychaData, segmentsData, allNychaData, devData
               "#e2e8f0",
             ],
             "line-width": [
-              "case",
-              ["==", ["get", "_visible"], false],
-              0.5,
-              1.5,
+              "interpolate", ["linear"], ["zoom"],
+              10, 0.5,
+              14, 2,
+              17, 3,
             ],
           },
         });
 
-        // NYCHA labels
+        // NYCHA development name labels
         m.addLayer({
           id: "nycha-labels",
           type: "symbol",
           source: "nycha",
-          minzoom: 14,
+          minzoom: 13,
           filter: ["==", ["get", "_visible"], true],
           layout: {
             "text-field": ["get", "name"],
-            "text-size": 11,
+            "text-size": ["interpolate", ["linear"], ["zoom"], 13, 9, 16, 13],
             "text-anchor": "center",
-            "text-max-width": 10,
+            "text-max-width": 8,
+            "text-allow-overlap": false,
+            "text-ignore-placement": false,
           },
           paint: {
-            "text-color": "#e2e8f0",
-            "text-halo-color": "#0f1117",
-            "text-halo-width": 1.5,
+            "text-color": "#f1f5f9",
+            "text-halo-color": "rgba(15,17,23,0.9)",
+            "text-halo-width": 2,
           },
         });
       }
 
-      // Street segments
+      // Street segments - add ON TOP of everything for visibility
       if (segmentsData) {
         m.addSource("segments", { type: "geojson", data: segmentsData });
+
+        // Segment outline (glow effect for visibility at low zoom)
+        m.addLayer({
+          id: "segments-glow",
+          type: "line",
+          source: "segments",
+          paint: {
+            "line-color": "rgba(0,0,0,0.5)",
+            "line-width": [
+              "interpolate", ["linear"], ["zoom"],
+              10, 4,
+              14, 8,
+              18, 14,
+            ],
+            "line-blur": 3,
+          },
+        });
 
         m.addLayer({
           id: "segments-line",
@@ -149,14 +171,66 @@ export default function MapView({ nychaData, segmentsData, allNychaData, devData
               60, "#dc2626",
             ],
             "line-width": [
-              "interpolate",
-              ["linear"],
-              ["zoom"],
-              10, 1.5,
-              14, 4,
-              18, 8,
+              "interpolate", ["linear"], ["zoom"],
+              10, 2.5,
+              13, 4,
+              15, 6,
+              18, 10,
             ],
-            "line-opacity": 0.85,
+            "line-opacity": 0.9,
+          },
+        });
+
+        // Street name labels on segments (visible at zoom 14+)
+        m.addLayer({
+          id: "segments-labels",
+          type: "symbol",
+          source: "segments",
+          minzoom: 14,
+          layout: {
+            "symbol-placement": "line-center",
+            "text-field": [
+              "concat",
+              ["get", "street_name"],
+              " (",
+              ["to-string", ["get", "width"]],
+              "ft)"
+            ],
+            "text-size": ["interpolate", ["linear"], ["zoom"], 14, 10, 17, 13],
+            "text-anchor": "center",
+            "text-allow-overlap": false,
+            "text-max-angle": 30,
+            "text-offset": [0, -1],
+          },
+          paint: {
+            "text-color": "#f8fafc",
+            "text-halo-color": "rgba(0,0,0,0.85)",
+            "text-halo-width": 2,
+          },
+        });
+
+        // Injury count badges on segments (zoom 15+)
+        m.addLayer({
+          id: "segments-injury-badges",
+          type: "symbol",
+          source: "segments",
+          minzoom: 15,
+          filter: [">", ["get", "pedestrian_injuries"], 0],
+          layout: {
+            "symbol-placement": "line-center",
+            "text-field": [
+              "concat",
+              ["to-string", ["get", "pedestrian_injuries"]],
+              " inj"
+            ],
+            "text-size": 10,
+            "text-offset": [0, 1],
+            "text-allow-overlap": false,
+          },
+          paint: {
+            "text-color": "#fbbf24",
+            "text-halo-color": "rgba(0,0,0,0.8)",
+            "text-halo-width": 1.5,
           },
         });
 
@@ -169,23 +243,27 @@ export default function MapView({ nychaData, segmentsData, allNychaData, devData
             catch { return props.adjacent_nycha || ""; }
           })();
 
+          const injuryColor = (props.pedestrian_injuries || 0) >= 30 ? "#dc2626" :
+            (props.pedestrian_injuries || 0) >= 15 ? "#f97316" :
+            (props.pedestrian_injuries || 0) >= 5 ? "#eab308" : "#22c55e";
+
           const html = `
-            <div class="text-sm">
-              <div class="font-bold text-base mb-1">${props.street_name || "Unknown Street"}</div>
-              <div class="text-gray-400 mb-2">Width: ${props.width || "?"}ft</div>
-              <div class="grid grid-cols-2 gap-x-4 gap-y-1">
-                <span class="text-gray-400">Injuries:</span>
-                <span class="font-semibold text-yellow-400">${props.pedestrian_injuries || 0}</span>
-                <span class="text-gray-400">Deaths:</span>
-                <span class="font-semibold text-red-400">${props.pedestrian_deaths || 0}</span>
-                <span class="text-gray-400">Crashes:</span>
-                <span class="font-semibold">${props.crash_count || 0}</span>
+            <div style="font-family: system-ui, sans-serif; font-size: 13px; line-height: 1.5;">
+              <div style="font-weight: 700; font-size: 15px; margin-bottom: 4px;">${props.street_name || "Unknown Street"}</div>
+              <div style="color: #94a3b8; margin-bottom: 8px;">Width: <strong style="color: #e2e8f0;">${props.width || "?"}ft</strong> curb-to-curb</div>
+              <div style="display: grid; grid-template-columns: auto auto; gap: 2px 16px;">
+                <span style="color: #94a3b8;">Ped. Injuries:</span>
+                <span style="font-weight: 600; color: ${injuryColor};">${props.pedestrian_injuries || 0}</span>
+                <span style="color: #94a3b8;">Ped. Deaths:</span>
+                <span style="font-weight: 600; color: ${(props.pedestrian_deaths || 0) > 0 ? '#dc2626' : '#94a3b8'};">${props.pedestrian_deaths || 0}</span>
+                <span style="color: #94a3b8;">Total Crashes:</span>
+                <span style="font-weight: 600;">${props.crash_count || 0}</span>
               </div>
-              <div class="mt-2 text-xs text-gray-400">Adjacent to: ${nychaNames}</div>
+              <div style="margin-top: 8px; padding-top: 8px; border-top: 1px solid #334155; color: #94a3b8; font-size: 11px;">Adjacent to: ${nychaNames}</div>
             </div>
           `;
           if (popupRef.current) popupRef.current.remove();
-          popupRef.current = new mapboxgl.Popup({ maxWidth: "300px" })
+          popupRef.current = new mapboxgl.Popup({ maxWidth: "320px", className: "nycha-popup" })
             .setLngLat(e.lngLat).setHTML(html).addTo(m);
         });
 
@@ -205,26 +283,26 @@ export default function MapView({ nychaData, segmentsData, allNychaData, devData
           const color = SEVERITY_COLORS[severity];
           
           const html = `
-            <div class="text-sm">
-              <div class="font-bold text-base mb-1">${props.name}</div>
-              <div class="text-gray-400">${props.borough || ""}</div>
-              <div class="mt-1 inline-block px-2 py-0.5 rounded text-xs font-medium" style="background:${color}22;color:${color};border:1px solid ${color}44">
-                ${severity.toUpperCase()}
+            <div style="font-family: system-ui, sans-serif; font-size: 13px; line-height: 1.5;">
+              <div style="font-weight: 700; font-size: 15px; margin-bottom: 2px;">${props.name}</div>
+              <div style="color: #94a3b8; margin-bottom: 6px;">${props.borough || ""}</div>
+              <div style="display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; background: ${color}22; color: ${color}; border: 1px solid ${color}44;">
+                ${severity.toUpperCase()} SEVERITY
               </div>
               ${props.has_qualifying_streets ? `
-                <div class="mt-2 grid grid-cols-2 gap-x-4 gap-y-1">
-                  <span class="text-gray-400">Wide streets:</span>
-                  <span class="font-semibold">${props.adjacent_wide_streets || 0}</span>
-                  <span class="text-gray-400">Ped. injuries:</span>
-                  <span class="font-semibold text-yellow-400">${props.total_pedestrian_injuries || 0}</span>
-                  <span class="text-gray-400">Ped. deaths:</span>
-                  <span class="font-semibold text-red-400">${props.total_pedestrian_deaths || 0}</span>
+                <div style="display: grid; grid-template-columns: auto auto; gap: 2px 16px; margin-top: 8px;">
+                  <span style="color: #94a3b8;">Wide streets (>60ft):</span>
+                  <span style="font-weight: 600;">${props.adjacent_wide_streets || 0}</span>
+                  <span style="color: #94a3b8;">Ped. Injuries:</span>
+                  <span style="font-weight: 600; color: #fbbf24;">${props.total_pedestrian_injuries || 0}</span>
+                  <span style="color: #94a3b8;">Ped. Deaths:</span>
+                  <span style="font-weight: 600; color: ${(props.total_pedestrian_deaths || 0) > 0 ? '#dc2626' : '#94a3b8'};">${props.total_pedestrian_deaths || 0}</span>
                 </div>
-              ` : `<div class="mt-1 text-gray-500 text-xs">No qualifying wide streets nearby</div>`}
+              ` : `<div style="margin-top: 6px; color: #64748b; font-size: 12px;">No qualifying wide streets adjacent</div>`}
             </div>
           `;
           if (popupRef.current) popupRef.current.remove();
-          popupRef.current = new mapboxgl.Popup({ maxWidth: "300px" })
+          popupRef.current = new mapboxgl.Popup({ maxWidth: "320px", className: "nycha-popup" })
             .setLngLat(e.lngLat).setHTML(html).addTo(m);
         });
 
@@ -246,11 +324,9 @@ export default function MapView({ nychaData, segmentsData, allNychaData, devData
     if (!map.current || !nychaData) return;
     const m = map.current;
     if (!m.isStyleLoaded()) return;
-    
     const src = m.getSource("nycha") as mapboxgl.GeoJSONSource;
     if (src) {
       src.setData(nychaData as any);
-      // Update color expression
       m.setPaintProperty("nycha-fill", "fill-color", buildNychaColorExpr() as any);
     }
   }, [nychaData, buildNychaColorExpr]);
@@ -260,7 +336,6 @@ export default function MapView({ nychaData, segmentsData, allNychaData, devData
     if (!map.current || !segmentsData) return;
     const m = map.current;
     if (!m.isStyleLoaded()) return;
-    
     const src = m.getSource("segments") as mapboxgl.GeoJSONSource;
     if (src) src.setData(segmentsData as any);
   }, [segmentsData]);
