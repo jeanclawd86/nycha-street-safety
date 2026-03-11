@@ -11,9 +11,9 @@
     "name": "JEFFERSON",
     "borough": "MANHATTAN",
     "adjacent_wide_streets": 11,
-    "total_pedestrian_injuries": 229,
+    "total_pedestrian_injuries": 228,
     "total_pedestrian_deaths": 2,
-    "total_crashes": 220
+    "total_crashes": 219
   },
   {
     "name": "GRANT",
@@ -35,9 +35,9 @@
     "name": "WAGNER",
     "borough": "MANHATTAN",
     "adjacent_wide_streets": 15,
-    "total_pedestrian_injuries": 121,
+    "total_pedestrian_injuries": 123,
     "total_pedestrian_deaths": 1,
-    "total_crashes": 118
+    "total_crashes": 120
   },
   {
     "name": "BLAND",
@@ -179,9 +179,9 @@
     "name": "AMSTERDAM",
     "borough": "MANHATTAN",
     "adjacent_wide_streets": 11,
-    "total_pedestrian_injuries": 71,
+    "total_pedestrian_injuries": 70,
     "total_pedestrian_deaths": 2,
-    "total_crashes": 73
+    "total_crashes": 72
   },
   {
     "name": "RAVENSWOOD",
@@ -315,9 +315,9 @@
     "name": "CASTLE HILL",
     "borough": "BRONX",
     "adjacent_wide_streets": 10,
-    "total_pedestrian_injuries": 48,
+    "total_pedestrian_injuries": 49,
     "total_pedestrian_deaths": 1,
-    "total_crashes": 46
+    "total_crashes": 47
   },
   {
     "name": "CARVER",
@@ -408,19 +408,19 @@
     "total_crashes": 39
   },
   {
-    "name": "NOSTRAND",
-    "borough": "BROOKLYN",
-    "adjacent_wide_streets": 7,
-    "total_pedestrian_injuries": 40,
-    "total_pedestrian_deaths": 2,
-    "total_crashes": 40
-  },
-  {
     "name": "LA GUARDIA",
     "borough": "MANHATTAN",
     "adjacent_wide_streets": 6,
     "total_pedestrian_injuries": 39,
     "total_pedestrian_deaths": 0,
+    "total_crashes": 39
+  },
+  {
+    "name": "NOSTRAND",
+    "borough": "BROOKLYN",
+    "adjacent_wide_streets": 7,
+    "total_pedestrian_injuries": 39,
+    "total_pedestrian_deaths": 2,
     "total_crashes": 39
   },
   {
@@ -584,14 +584,6 @@
     "total_crashes": 24
   },
   {
-    "name": "CHELSEA",
-    "borough": "MANHATTAN",
-    "adjacent_wide_streets": 3,
-    "total_pedestrian_injuries": 24,
-    "total_pedestrian_deaths": 0,
-    "total_crashes": 24
-  },
-  {
     "name": "RUTGERS",
     "borough": "MANHATTAN",
     "adjacent_wide_streets": 1,
@@ -603,6 +595,14 @@
     "name": "SOTOMAYOR HOUSES",
     "borough": "BRONX",
     "adjacent_wide_streets": 5,
+    "total_pedestrian_injuries": 23,
+    "total_pedestrian_deaths": 0,
+    "total_crashes": 23
+  },
+  {
+    "name": "CHELSEA",
+    "borough": "MANHATTAN",
+    "adjacent_wide_streets": 3,
     "total_pedestrian_injuries": 23,
     "total_pedestrian_deaths": 0,
     "total_crashes": 23

@@ -8,14 +8,17 @@ interface FilterBarProps {
   setFilters: (f: Filters) => void;
   boroughs: string[];
   maxInjuryCount: number;
+  yearMin: number;
+  yearMax: number;
   onReset: () => void;
 }
 
-export default function FilterBar({ filters, setFilters, boroughs, maxInjuryCount, onReset }: FilterBarProps) {
+export default function FilterBar({ filters, setFilters, boroughs, maxInjuryCount, yearMin, yearMax, onReset }: FilterBarProps) {
   const [expanded, setExpanded] = useState(true);
 
+  const isDateFiltered = filters.yearStart !== yearMin || filters.yearEnd !== yearMax;
   const isFiltered = filters.borough !== "all" || filters.minInjuries > 0 || 
-    filters.hasDeaths !== null || filters.search !== "" || filters.minStreets > 0 || filters.truckRoute !== "all";
+    filters.hasDeaths !== null || filters.search !== "" || filters.minStreets > 0 || filters.truckRoute !== "all" || isDateFiltered;
 
   const activeCount = [
     filters.borough !== "all",
@@ -24,6 +27,7 @@ export default function FilterBar({ filters, setFilters, boroughs, maxInjuryCoun
     filters.search !== "",
     filters.minStreets > 0,
     filters.truckRoute !== "all",
+    isDateFiltered,
   ].filter(Boolean).length;
 
   if (!expanded) {
@@ -58,6 +62,9 @@ export default function FilterBar({ filters, setFilters, boroughs, maxInjuryCoun
               )}
               {filters.truckRoute !== "all" && (
                 <FilterChip label={filters.truckRoute === "truck" ? "Truck routes only" : "Non-truck only"} onRemove={() => setFilters({ ...filters, truckRoute: "all" })} color={filters.truckRoute === "truck" ? "red" : "blue"} />
+              )}
+              {isDateFiltered && (
+                <FilterChip label={`${filters.yearStart}–${filters.yearEnd}`} onRemove={() => setFilters({ ...filters, yearStart: yearMin, yearEnd: yearMax })} />
               )}
               {filters.search && (
                 <FilterChip label={`"${filters.search}"`} onRemove={() => setFilters({ ...filters, search: "" })} />
@@ -169,6 +176,30 @@ export default function FilterBar({ filters, setFilters, boroughs, maxInjuryCoun
               {label}
             </button>
           ))}
+        </div>
+
+        {/* Date range */}
+        <div className="flex items-center gap-2 text-sm text-gray-400 shrink-0">
+          <span className="whitespace-nowrap text-xs">📅</span>
+          <select
+            value={filters.yearStart}
+            onChange={(e) => setFilters({ ...filters, yearStart: parseInt(e.target.value) })}
+            className="px-1.5 py-1.5 bg-[#242836] border border-[#363b4e] rounded-md text-xs text-gray-200 focus:outline-none focus:ring-1 focus:ring-blue-500/50 appearance-none cursor-pointer"
+          >
+            {Array.from({ length: yearMax - yearMin + 1 }, (_, i) => yearMin + i).map(y => (
+              <option key={y} value={y}>{y}</option>
+            ))}
+          </select>
+          <span className="text-gray-600 text-xs">–</span>
+          <select
+            value={filters.yearEnd}
+            onChange={(e) => setFilters({ ...filters, yearEnd: parseInt(e.target.value) })}
+            className="px-1.5 py-1.5 bg-[#242836] border border-[#363b4e] rounded-md text-xs text-gray-200 focus:outline-none focus:ring-1 focus:ring-blue-500/50 appearance-none cursor-pointer"
+          >
+            {Array.from({ length: yearMax - filters.yearStart + 1 }, (_, i) => filters.yearStart + i).map(y => (
+              <option key={y} value={y}>{y}</option>
+            ))}
+          </select>
         </div>
 
         {/* Reset */}

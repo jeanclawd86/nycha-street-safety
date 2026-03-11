@@ -5,6 +5,8 @@ export interface Filters {
   minStreets: number;
   hasDeaths: boolean | null;
   truckRoute: "all" | "truck" | "non-truck";
+  yearStart: number;
+  yearEnd: number;
   search: string;
 }
 
@@ -58,5 +60,22 @@ export const DEFAULT_FILTERS: Filters = {
   minStreets: 0,
   hasDeaths: null,
   truckRoute: "all",
+  yearStart: 2012,
+  yearEnd: 2026,
   search: "",
 };
+
+// Recompute segment injuries for a given year range from crashes_by_year JSON
+export function getSegmentInjuriesInRange(crashesByYearJson: string, yearStart: number, yearEnd: number): { injuries: number; deaths: number; crashes: number } {
+  try {
+    const byYear = JSON.parse(crashesByYearJson || "{}");
+    let injuries = 0, deaths = 0, crashes = 0;
+    for (let y = yearStart; y <= yearEnd; y++) {
+      const d = byYear[String(y)];
+      if (d) { injuries += d.inj; deaths += d.deaths; crashes += d.count; }
+    }
+    return { injuries, deaths, crashes };
+  } catch {
+    return { injuries: 0, deaths: 0, crashes: 0 };
+  }
+}

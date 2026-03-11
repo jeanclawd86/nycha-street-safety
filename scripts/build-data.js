@@ -178,7 +178,7 @@ async function fetchCollisions() {
   console.log("\n💥 Fetching pedestrian collisions...");
   const raw = await fetchAllPages(URLS.collisions, {
     $where: "(number_of_pedestrians_injured > 0 OR number_of_pedestrians_killed > 0) AND latitude IS NOT NULL",
-    $select: "latitude,longitude,number_of_pedestrians_injured,number_of_pedestrians_killed,on_street_name",
+    $select: "latitude,longitude,number_of_pedestrians_injured,number_of_pedestrians_killed,on_street_name,crash_date",
   });
   console.log(`  ✓ ${raw.length} pedestrian collision records`);
   return raw;
@@ -266,15 +266,18 @@ function findSegmentsNearNYCHA(streets, nychaFC) {
 function assignCollisions(segments, collisions) {
   console.log("\n🔗 Assigning collisions to block-face segments...");
 
+  // Initialize: store per-year crash data for client-side date filtering
   for (const seg of segments.features) {
     seg.properties.pedestrian_injuries = 0;
     seg.properties.pedestrian_deaths = 0;
     seg.properties.crash_count = 0;
+    seg.properties._crashes_by_year = {}; // { "2019": { inj: X, deaths: Y, count: Z } }
   }
 
   const segIndex = buildGridIndex(segments.features, 0.001);
   let assigned = 0;
   let skipped = 0;
+  const yearRange = { min: 9999, max: 0 };
 
   for (let i = 0; i < collisions.length; i++) {
     const c = collisions[i];
@@ -298,17 +301,39 @@ function assignCollisions(segments, collisions) {
     }
 
     if (bestIdx >= 0) {
-      segments.features[bestIdx].properties.pedestrian_injuries += parseInt(c.number_of_pedestrians_injured) || 0;
-      segments.features[bestIdx].properties.pedestrian_deaths += parseInt(c.number_of_pedestrians_killed) || 0;
+      const injuries = parseInt(c.number_of_pedestrians_injured) || 0;
+      const deaths = parseInt(c.number_of_pedestrians_killed) || 0;
+      const year = c.crash_date ? new Date(c.crash_date).getFullYear() : 0;
+
+      segments.features[bestIdx].properties.pedestrian_injuries += injuries;
+      segments.features[bestIdx].properties.pedestrian_deaths += deaths;
       segments.features[bestIdx].properties.crash_count++;
+
+      if (year > 0) {
+        const yKey = String(year);
+        const byYear = segments.features[bestIdx].properties._crashes_by_year;
+        if (!byYear[yKey]) byYear[yKey] = { inj: 0, deaths: 0, count: 0 };
+        byYear[yKey].inj += injuries;
+        byYear[yKey].deaths += deaths;
+        byYear[yKey].count++;
+        if (year < yearRange.min) yearRange.min = year;
+        if (year > yearRange.max) yearRange.max = year;
+      }
+
       assigned++;
     }
 
     if (i > 0 && i % 50000 === 0) console.log(`  Processed ${i}/${collisions.length} (${assigned} assigned)...`);
   }
 
-  console.log(`  ✓ Assigned ${assigned} collisions to block-face segments (skipped ${skipped})`);
-  return segments;
+  // Serialize _crashes_by_year to JSON string for GeoJSON
+  for (const seg of segments.features) {
+    seg.properties.crashes_by_year = JSON.stringify(seg.properties._crashes_by_year);
+    delete seg.properties._crashes_by_year;
+  }
+
+  console.log(`  ✓ Assigned ${assigned} collisions (${skipped} skipped), years ${yearRange.min}-${yearRange.max}`);
+  return { segments, yearRange };
 }
 
 function buildDevTable(segments, nychaFC) {
@@ -385,7 +410,7 @@ async function main() {
   console.log(`  ✓ Tagged ${taggedTruck} of ${allStreets.features.length} segments as truck routes`);
 
   const nearNYCHA = findSegmentsNearNYCHA(allStreets, nychaFC);
-  const withCrashes = assignCollisions(nearNYCHA, collisions);
+  const { segments: withCrashes, yearRange } = assignCollisions(nearNYCHA, collisions);
   const devTable = buildDevTable(withCrashes, nychaFC);
 
   // Enrich NYCHA polygons
@@ -418,6 +443,10 @@ async function main() {
   console.log(`✅ segments.geojson (${withCrashes.features.length} block-face segments)`);
   fs.writeFileSync(path.join(OUTPUT_DIR, "developments.json"), JSON.stringify(devTable, null, 2));
   console.log(`✅ developments.json (${devTable.length} developments)`);
+
+  const meta = { yearMin: yearRange.min, yearMax: yearRange.max, totalSegments: withCrashes.features.length, totalDevelopments: devTable.length, generatedAt: new Date().toISOString() };
+  fs.writeFileSync(path.join(OUTPUT_DIR, "meta.json"), JSON.stringify(meta, null, 2));
+  console.log(`✅ meta.json (${yearRange.min}-${yearRange.max})`);
 
   const elapsed = ((Date.now() - t0) / 1000).toFixed(1);
   console.log(`\n🎉 Pipeline complete in ${elapsed}s`);

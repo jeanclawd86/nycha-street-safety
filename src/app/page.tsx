@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import TableView from "@/components/TableView";
 import Legend from "@/components/Legend";
 import FilterBar from "@/components/FilterBar";
-import { Filters, Development, getSeverity, DEFAULT_FILTERS } from "@/lib/types";
+import { Filters, Development, getSeverity, DEFAULT_FILTERS, getSegmentInjuriesInRange } from "@/lib/types";
 
 const MapView = dynamic(() => import("@/components/MapView"), { ssr: false });
 
@@ -30,8 +30,10 @@ function StatChip({ value, total, label, color }: { value: number; total?: numbe
 export default function Home() {
   const [view, setView] = useState<ViewMode>("map");
   const [nychaData, setNychaData] = useState<GeoJSON.FeatureCollection | null>(null);
+  const [rawSegments, setRawSegments] = useState<GeoJSON.FeatureCollection | null>(null);
   const [segmentsData, setSegmentsData] = useState<GeoJSON.FeatureCollection | null>(null);
   const [devData, setDevData] = useState<Development[] | null>(null);
+  const [meta, setMeta] = useState<{ yearMin: number; yearMax: number } | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [flyTo, setFlyTo] = useState<{ lng: number; lat: number; name?: string } | null>(null);
@@ -41,20 +43,22 @@ export default function Home() {
   useEffect(() => {
     async function loadData() {
       try {
-        const [nychaRes, segRes, devRes] = await Promise.all([
+        const [nychaRes, segRes, devRes, metaRes] = await Promise.all([
           fetch("/data/nycha.geojson"),
           fetch("/data/segments.geojson"),
           fetch("/data/developments.json"),
+          fetch("/data/meta.json"),
         ]);
 
         if (!nychaRes.ok || !segRes.ok || !devRes.ok) {
           throw new Error("Data files not found. Run `npm run build-data` first.");
         }
 
-        const [nycha, segments, devs] = await Promise.all([
+        const [nycha, segments, devs, metaData] = await Promise.all([
           nychaRes.json(),
           segRes.json(),
           devRes.json(),
+          metaRes.ok ? metaRes.json() : { yearMin: 2012, yearMax: 2026 },
         ]);
 
         // Enrich developments with severity
@@ -64,8 +68,11 @@ export default function Home() {
         }));
 
         setNychaData(nycha);
+        setRawSegments(segments);
         setSegmentsData(segments);
         setDevData(enrichedDevs);
+        setMeta(metaData);
+        setFilters(prev => ({ ...prev, yearStart: metaData.yearMin, yearEnd: metaData.yearMax }));
       } catch (err) {
         setError(err instanceof Error ? err.message : "Failed to load data");
       } finally {
@@ -75,22 +82,66 @@ export default function Home() {
     loadData();
   }, []);
 
+  // Recompute segment injuries and dev stats when year range changes
+  const isDateFiltered = meta && (filters.yearStart !== meta.yearMin || filters.yearEnd !== meta.yearMax);
+
+  const dateFilteredSegments = useMemo(() => {
+    if (!rawSegments || !isDateFiltered) return rawSegments;
+    return {
+      ...rawSegments,
+      features: rawSegments.features.map((f: any) => {
+        const stats = getSegmentInjuriesInRange(f.properties.crashes_by_year, filters.yearStart, filters.yearEnd);
+        return {
+          ...f,
+          properties: { ...f.properties, pedestrian_injuries: stats.injuries, pedestrian_deaths: stats.deaths, crash_count: stats.crashes },
+        };
+      }),
+    };
+  }, [rawSegments, filters.yearStart, filters.yearEnd, isDateFiltered]);
+
+  // Recompute devData when date range changes
+  const dateFilteredDevData = useMemo(() => {
+    if (!dateFilteredSegments || !isDateFiltered) return devData;
+    if (!devData) return null;
+    // Rebuild dev stats from segments
+    const devMap: Record<string, { injuries: number; deaths: number; crashes: number; streets: number }> = {};
+    for (const f of dateFilteredSegments.features) {
+      const names: string[] = (() => { try { return JSON.parse(f.properties.adjacent_nycha || "[]"); } catch { return []; } })();
+      for (const name of names) {
+        if (!devMap[name]) devMap[name] = { injuries: 0, deaths: 0, crashes: 0, streets: 0 };
+        devMap[name].injuries += f.properties.pedestrian_injuries || 0;
+        devMap[name].deaths += f.properties.pedestrian_deaths || 0;
+        devMap[name].crashes += f.properties.crash_count || 0;
+        devMap[name].streets++;
+      }
+    }
+    return devData.map(d => {
+      const stats = devMap[d.name];
+      if (!stats) return { ...d, total_pedestrian_injuries: 0, total_pedestrian_deaths: 0, total_crashes: 0, severity: getSeverity(0, 0) };
+      return { ...d, total_pedestrian_injuries: stats.injuries, total_pedestrian_deaths: stats.deaths, total_crashes: stats.crashes, adjacent_wide_streets: stats.streets, severity: getSeverity(stats.injuries, stats.deaths) };
+    });
+  }, [dateFilteredSegments, devData, isDateFiltered]);
+
+  // Use date-filtered data for all downstream logic
+  const activeDevData = dateFilteredDevData || devData;
+  const activeSegments = dateFilteredSegments || segmentsData;
+
   // Get unique boroughs for filter
   const boroughs = useMemo(() => {
-    if (!devData) return [];
-    return Array.from(new Set(devData.map((d) => d.borough))).sort();
-  }, [devData]);
+    if (!activeDevData) return [];
+    return Array.from(new Set(activeDevData.map((d) => d.borough))).sort();
+  }, [activeDevData]);
 
   // Get max injuries for slider
   const maxInjuryCount = useMemo(() => {
-    if (!devData) return 100;
-    return Math.max(...devData.map((d) => d.total_pedestrian_injuries), 1);
-  }, [devData]);
+    if (!activeDevData) return 100;
+    return Math.max(...activeDevData.map((d) => d.total_pedestrian_injuries), 1);
+  }, [activeDevData]);
 
   // Filter developments
   const filteredDevs = useMemo(() => {
-    if (!devData) return [];
-    return devData.filter((d) => {
+    if (!activeDevData) return [];
+    return activeDevData.filter((d) => {
       if (filters.borough !== "all" && d.borough !== filters.borough) return false;
       if (d.total_pedestrian_injuries < filters.minInjuries) return false;
       if (filters.maxInjuries !== Infinity && d.total_pedestrian_injuries > filters.maxInjuries) return false;
@@ -103,17 +154,17 @@ export default function Home() {
       }
       return true;
     });
-  }, [devData, filters]);
+  }, [activeDevData, filters]);
 
   // Filter NYCHA GeoJSON to match
   const filteredNychaNames = useMemo(() => new Set(filteredDevs.map((d) => d.name)), [filteredDevs]);
 
   // Filtered segments: adjacent to filtered NYCHA developments + truck route filter
   const filteredSegments = useMemo(() => {
-    if (!segmentsData) return null;
+    if (!activeSegments) return null;
     return {
-      ...segmentsData,
-      features: segmentsData.features.filter((f) => {
+      ...activeSegments,
+      features: activeSegments.features.filter((f: any) => {
         // Truck route filter
         if (filters.truckRoute === "truck" && !f.properties?.is_truck_route) return false;
         if (filters.truckRoute === "non-truck" && f.properties?.is_truck_route) return false;
@@ -125,7 +176,7 @@ export default function Home() {
         }
       }),
     };
-  }, [segmentsData, filteredNychaNames, filters.truckRoute]);
+  }, [activeSegments, filteredNychaNames, filters.truckRoute]);
 
   // Filtered NYCHA polygons
   const filteredNycha = useMemo(() => {
@@ -159,9 +210,9 @@ export default function Home() {
       <header className="flex items-center justify-between px-4 sm:px-6 py-2.5 bg-[#1a1d27] border-b border-[#242836] shrink-0">
         <div className="flex items-center gap-3">
           <h1 className="text-base sm:text-lg font-bold tracking-tight whitespace-nowrap">NYCHA Street Safety</h1>
-          {!loading && devData && (
+          {!loading && activeDevData && (
             <div className="hidden md:flex items-center gap-2 ml-2">
-              <StatChip value={filteredDevs.length} total={devData.length} label="devs" />
+              <StatChip value={filteredDevs.length} total={activeDevData.length} label="devs" />
               <StatChip value={totalFilteredInjuries} label="injuries" color="yellow" />
               <StatChip value={totalFilteredDeaths} label="deaths" color="red" />
               <StatChip value={filteredSegments?.features.length || 0} label="segments" />
@@ -193,7 +244,9 @@ export default function Home() {
           setFilters={setFilters}
           boroughs={boroughs}
           maxInjuryCount={maxInjuryCount}
-          onReset={() => setFilters(DEFAULT_FILTERS)}
+          yearMin={meta?.yearMin || 2012}
+          yearMax={meta?.yearMax || 2026}
+          onReset={() => setFilters({ ...DEFAULT_FILTERS, yearStart: meta?.yearMin || 2012, yearEnd: meta?.yearMax || 2026 })}
         />
       )}
 
